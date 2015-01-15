@@ -1,13 +1,14 @@
 # wp-color-picker-alpha
-
 Overwrite [Automattic Iris][1] for enabled Alpha Channel in wpColorPicker
 Only run in input and is defined data alpha in true
 
 ## Screenshot
-- wpColorPicker
+wpColorPicker
+
 ![wpcolorpicker-01](https://cloud.githubusercontent.com/assets/747817/5768333/12c1779e-9d10-11e4-94ad-055a063f571c.png)
-***
-- wpColorPicker in mode Alpha Channel
+---
+wpColorPicker in mode Alpha Channel
+
 ![wpcolorpicker-02](https://cloud.githubusercontent.com/assets/747817/5768335/17eae354-9d10-11e4-95cf-14868124309c.png)
 ![wpcolorpicker-03](https://cloud.githubusercontent.com/assets/747817/5768336/1b6ff956-9d10-11e4-80e1-7bcf3fde8ea8.png)
 
@@ -15,12 +16,10 @@ Only run in input and is defined data alpha in true
 Download and add script in you theme options or plugin.
 
 ## Usage
-
 - Add class `.color-picker` and `data-alpha="true"` in input
 - This class is optional but then need to call yourself to the class you want
 
 ### Examples
-
 ```
 <input type="text" class="color-picker" data-alpha="true">
 <input type="text" class="color-picker" value="#ffbc00" data-alpha="true">
