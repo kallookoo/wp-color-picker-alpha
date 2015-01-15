@@ -1,10 +1,15 @@
-# wpColorPicker ( support rbga value )
+# wp-color-picker-alpha
 
-- Overwrite [Automattic Iris][1] for enabled Alpha Channel in wpColorPicker
-- Only run in input and is defined data alpha in true
+Overwrite [Automattic Iris][1] for enabled Alpha Channel in wpColorPicker
+Only run in input and is defined data alpha in true
 
 ## Screenshot
-![wpcolorpicker](https://cloud.githubusercontent.com/assets/747817/5768233/05f7afd4-9d0f-11e4-819c-6fcf905045c2.gif)
+- wpColorPicker
+![wpcolorpicker-01](https://cloud.githubusercontent.com/assets/747817/5768333/12c1779e-9d10-11e4-94ad-055a063f571c.png)
+***
+- wpColorPicker in mode Alpha Channel
+![wpcolorpicker-02](https://cloud.githubusercontent.com/assets/747817/5768335/17eae354-9d10-11e4-95cf-14868124309c.png)
+![wpcolorpicker-03](https://cloud.githubusercontent.com/assets/747817/5768336/1b6ff956-9d10-11e4-80e1-7bcf3fde8ea8.png)
 
 ## Instalation
 Download and add script in you theme options or plugin.
