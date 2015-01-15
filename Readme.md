@@ -4,6 +4,7 @@
 - Only run in input and is defined data alpha in true
 
 ## Screenshot
+![wpcolorpicker](https://cloud.githubusercontent.com/assets/747817/5768233/05f7afd4-9d0f-11e4-819c-6fcf905045c2.gif)
 
 ## Instalation
 Download and add script in you theme options or plugin.
