@@ -6,7 +6,7 @@ Only run in input and is defined data alpha in true
 wpColorPicker
 
 ![wpcolorpicker-01](https://cloud.githubusercontent.com/assets/747817/5768333/12c1779e-9d10-11e4-94ad-055a063f571c.png)
----
+
 
 wpColorPicker in mode Alpha Channel
 
