@@ -17,9 +17,12 @@ Only run in input and is defined data alpha in true
 Download and add script in you theme options or plugin.
 
 ## Usage
-Add class `.color-picker` and `data-alpha="true"` in input
+Add class `.color-picker` and `data-alpha="true"` in input.
 
-This class is optional but then need to call wpColorPicker yourself to the class you want
+Add `data-reset-alpha="true"` for set Alpha Channel to 100 after press color palette.
+
+This class is optional but then need to call wpColorPicker yourself to the class you want.
+This data-reset-alpha is optional.
 
 ### Examples
 ```
