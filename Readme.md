@@ -22,6 +22,7 @@ Add class `.color-picker` and `data-alpha="true"` in input.
 Add `data-reset-alpha="true"` for set Alpha Channel to 100 after press color palette.
 
 This class is optional but then need to call wpColorPicker yourself to the class you want.
+
 This data-reset-alpha is optional.
 
 ### Examples
