@@ -36,24 +36,11 @@
      * Overwrite iris
      */
     $.widget( 'a8c.iris', $.a8c.iris, {
-        // _isAlphaChannel: function() {
-        //     this.options.alpha = this.element.data( 'alpha' ) || false;
-        //     if ( this.options.alpha && ! this.element.is( ':input' ) )
-        //         this.options.alpha = false;
-
-        //     return this;
-        // },
-        // _init: function() {
-        //     this.options.alpha = false;
-        // },
         _create: function() {
-            // this._isAlphaChannel();
             this._super();
 
             // Global option for check is mode rbga is enabled
             this.options.alpha = this.element.data( 'alpha' ) || false;
-
-            console.log('_create: ', this.options.alpha, this.element );
 
             // Is not input disabled
             if ( ! this.element.is( ':input' ) ) {
@@ -97,15 +84,9 @@
             }
         },
         _initControls: function() {
-            // this._isAlphaChannel();
             this._super();
 
-            // if ( typeof this.options.alpha == 'undefined' )
-            //     this.options.alpha = false;
-
-            console.log('_initControls: ', this.options.alpha, this.element );
-
-            if ( typeof this.options.alpha !== 'undefined' && this.options.alpha ) {
+            if ( this.options.alpha ) {
                 var self = this,
                     controls = self.controls;
 
@@ -124,15 +105,9 @@
             }
         },
         _change: function() {
-            // this._isAlphaChannel();
             this._super();
 
-            // if ( typeof this.options.alpha == 'undefined' )
-            //     this.options.alpha = false;
-
-            console.log('_change: ', this.picker, this.options.alpha, this.element );
-
-            if ( typeof this.options.alpha !== 'undefined' && this.options.alpha ) {
+            if ( this.options.alpha ) {
                 var self = this,
                     el = self.element,
                     controls = self.controls,

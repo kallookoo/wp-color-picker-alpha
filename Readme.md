@@ -27,10 +27,15 @@ This data-reset-alpha is optional.
 ### Examples
 ```
 <input type="text" class="color-picker" data-alpha="true">
+<input type="text" class="color-picker" data-alpha="true" data-reset-alpha="true">
 <input type="text" class="color-picker" value="#ffbc00" data-alpha="true">
+<input type="text" class="color-picker" value="#ffbc00" data-alpha="true" data-reset-alpha="true">
 <input type="text" class="color-picker" value="rgba(255,0,0,0.25)" data-alpha="true">
+<input type="text" class="color-picker" value="rgba(255,0,0,0.25)" data-alpha="true" data-reset-alpha="true">
 <input type="text" class="color-picker" data-default-color="#ffbc00" value="#ffbc00" data-alpha="true">
+<input type="text" class="color-picker" data-default-color="#ffbc00" value="#ffbc00" data-alpha="true" data-reset-alpha="true">
 <input type="text" class="color-picker" data-default-color="rgba(255,0,0,0.25)" value="#ffbc00" data-alpha="true">
+<input type="text" class="color-picker" data-default-color="rgba(255,0,0,0.25)" value="#ffbc00" data-alpha="true" data-reset-alpha="true">
 ```
 
 ## License
