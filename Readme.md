@@ -21,10 +21,10 @@ Add class `.color-picker` and `data-alpha="true"` in input.
 
 > This class is optional but then need to call wpColorPicker yourself to the class you want.
 
-### Optional
-Add `data-reset-alpha="true"` for set Alpha Channel to 100 after press color palette.
+###### Optional
+Add `data-reset-alpha="true"` for set Alpha Channel for disabled transparency after press color palette.
 
-### Examples
+###### Examples
 ```
 <input type="text" class="color-picker" data-alpha="true">
 <input type="text" class="color-picker" data-alpha="true" data-reset-alpha="true">
@@ -50,7 +50,7 @@ If you would like to contribute please fork the project and [report bugs][2] or 
 If only tested in Firefox last version and WordPress last version
 
 ## Changelog
-#### v1.0.0
+###### v1.0.0
 Initial Release
 
 
