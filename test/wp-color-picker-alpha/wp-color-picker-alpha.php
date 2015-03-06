@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Color Picker Alpha
- * Plugin URI: https://github.com/23r9i0/wp-color-picker-alpha-test
- * Description: Plugin to test wp-color-picker-alpha
+ * Plugin Name: WP Color Picker Alpha
+ * Plugin URI: https://github.com/23r9i0/wp-color-picker-alpha
+ * Description: Plugin to test wp-color-picker-alpha script
  * Version: 1.0
  * Author: Sergio P.A. ( 23r9i0 )
  * Author URI: http://dsergio.com/
@@ -11,10 +11,10 @@
 
 defined( 'ABSPATH' ) or exit;
 
-add_action( 'plugins_loaded', 'ColorPickerAlphaTest::instance' );
-register_deactivation_hook( __FILE__, 'ColorPickerAlphaTest::deactivation' );
+add_action( 'plugins_loaded', 'WP_Color_Picker_Alpha::instance' );
+register_deactivation_hook( __FILE__, 'WP_Color_Picker_Alpha::deactivation' );
 
-class ColorPickerAlphaTest {
+class WP_Color_Picker_Alpha {
 
 	private static $_instance = null;
 
