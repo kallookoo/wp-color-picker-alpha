@@ -4,7 +4,7 @@
 
 > Only run in input and is defined data alpha in true
 
-## Screenshot
+## Screenshots
 ###### wpColorPicker
 
 ![wpcolorpicker-01](https://cloud.githubusercontent.com/assets/747817/5768333/12c1779e-9d10-11e4-94ad-055a063f571c.png)
@@ -15,7 +15,12 @@
 ![wpcolorpicker-03](https://cloud.githubusercontent.com/assets/747817/5768336/1b6ff956-9d10-11e4-80e1-7bcf3fde8ea8.png)
 
 ## Instalation
-Download and add script in you theme options or plugin.
+Download and copy script inside folder dist in you theme options or plugin.
+For call this script use this code:
+```
+wp_enqueue_style( 'wp-color-picker' );
+wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '1.1', $in_footer );
+```
 
 ## Usage
 Add class `.color-picker` and `data-alpha="true"` in input.
