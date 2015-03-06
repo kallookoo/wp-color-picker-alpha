@@ -18,12 +18,15 @@ class ColorPickerAlphaTest {
 
 	private static $_instance = null;
 
-	private $_plugin = null;
+	private $_plugin_hook = null;
 
 	private $_defaults_colors = array(
-		'normal'      => '#2980b9',
-		'alpha'       => 'rgba(22,160,133, 0.5)',
-		'alpha-reset' => 'rgba(192,57,43,0.5)'
+		'alpha_color'             => 'rgba(192,57,43,1.0)',
+		'alpha_color_clear'       => 'rgba(211,84,0,1.0)',
+		'alpha_color_reset'       => 'rgba(231,76,60,1.0)',
+		'alpha_color_reset_clear' => 'rgba(230,126,34,1.0)',
+		'normal_color'            => '#16a085',
+		'normal_color_clear'      => '#27ae60',
 	);
 
 	private $_current_colors = array();
@@ -36,7 +39,7 @@ class ColorPickerAlphaTest {
 	}
 
 	private function __construct() {
-		$this->_current_colors = get_option( 'ColorPickerAlphaTest', $this->_defaults_colors );
+		$this->_current_colors = get_option( 'wp-color-picker-alpha', $this->_defaults_colors );
 
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -44,7 +47,7 @@ class ColorPickerAlphaTest {
 	}
 
 	public function admin_menu() {
-		$this->_plugin = add_options_page(
+		$this->_plugin_hook = add_options_page(
 			'Color Picker Alpha',
 			'Color Picker Alpha',
 			'manage_options',
@@ -58,8 +61,8 @@ class ColorPickerAlphaTest {
 		<div class="wrap">
 			<h2>Color Picker Alpha Test</h2>
 			<form method="post" action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>">
-			<?php settings_fields( 'cpat-register' ); ?>
-			<?php do_settings_sections( $this->_plugin ); ?>
+			<?php settings_fields( 'wp-color-picker-alpha-register' ); ?>
+			<?php do_settings_sections( $this->_plugin_hook ); ?>
 			<?php submit_button(); ?>
 			</form>
 		</div>
@@ -67,38 +70,58 @@ class ColorPickerAlphaTest {
 	}
 
 	public function admin_init() {
-		register_setting( 'cpat-register', 'ColorPickerAlphaTest' );
+		register_setting( 'wp-color-picker-alpha-register', 'wp-color-picker-alpha' );
 
 		// Normal Color
-		add_settings_section( 'cpat_normal_color', '', '__return_false', $this->_plugin );
-		add_settings_field( 'normal_color', 'Color Without Alpha', array( $this, 'field_color' ), $this->_plugin, 'cpat_normal_color',
+		add_settings_section( 'wp-color-picker-alpha-normal_color', 'Color Without Alpha Channel', '__return_false', $this->_plugin_hook );
+		add_settings_field( 'normal_color', 'Color with default color', array( $this, 'field_color' ), $this->_plugin_hook, 'wp-color-picker-alpha-normal_color',
 			array(
 				'alpha'         => 0,
-				'current_color' => $this->_current_colors['normal'],
-				// 'default_color' => $this->_defaults_colors['normal'],
-				'name'          => 'normal',
+				'current_color' => $this->_current_colors['normal_color'],
+				'default_color' => $this->_defaults_colors['normal_color'],
+				'name'          => 'normal_color',
+			)
+		);
+		add_settings_field( 'normal_color_clear', 'Color without default color', array( $this, 'field_color' ), $this->_plugin_hook, 'wp-color-picker-alpha-normal_color',
+			array(
+				'alpha'         => 0,
+				'current_color' => $this->_current_colors['normal_color_clear'],
+				'name'          => 'normal_color_clear',
 			)
 		);
 
 		// Alpha Color
-		add_settings_section( 'cpat_alpha_color', '', '__return_false', $this->_plugin );
-		add_settings_field( '', 'Color With Alpha', array( $this, 'field_color' ), $this->_plugin, 'cpat_alpha_color',
+		add_settings_section( 'wp-color-picker-alpha_alpha_color', 'Color With Alpha Channel', '__return_false', $this->_plugin_hook );
+		add_settings_field( 'alpha_color', 'Color with default color', array( $this, 'field_color' ), $this->_plugin_hook, 'wp-color-picker-alpha_alpha_color',
 			array(
 				'alpha'         => 1,
-				'current_color' => $this->_current_colors['alpha'],
-				// 'default_color' => $this->_defaults_colors['alpha'],
-				'name'          => 'alpha',
+				'current_color' => $this->_current_colors['alpha_color'],
+				'default_color' => $this->_defaults_colors['alpha_color'],
+				'name'          => 'alpha_color',
 			)
 		);
-
-		// Alpha Color with reset
-		add_settings_section( 'cpat_alpha_reset_color', '', '__return_false', $this->_plugin );
-		add_settings_field( '', 'Color With Alpha And Reset Option', array( $this, 'field_color' ), $this->_plugin, 'cpat_alpha_reset_color',
+		add_settings_field( 'alpha_color_clear', 'Color without default color', array( $this, 'field_color' ), $this->_plugin_hook, 'wp-color-picker-alpha_alpha_color',
+			array(
+				'alpha'         => 1,
+				'current_color' => $this->_current_colors['alpha_color_clear'],
+				'default_color' => $this->_defaults_colors['alpha_color_clear'],
+				'name'          => 'alpha_color',
+			)
+		);
+		add_settings_field( 'alpha_color_reset', 'Color with default color and reset Alpha Channel', array( $this, 'field_color' ), $this->_plugin_hook, 'wp-color-picker-alpha_alpha_color',
 			array(
 				'alpha'         => 2,
-				'current_color' => $this->_current_colors['alpha-reset'],
-				'default_color' => $this->_defaults_colors['alpha-reset'],
-				'name'          => 'alpha-reset',
+				'current_color' => $this->_current_colors['alpha_color_reset'],
+				'default_color' => $this->_defaults_colors['alpha_color_reset'],
+				'name'          => 'alpha_color_reset',
+			)
+		);
+		add_settings_field( 'alpha_color_reset_clear', 'Color without default color and reset Alpha Channel', array( $this, 'field_color' ), $this->_plugin_hook, 'wp-color-picker-alpha_alpha_color',
+			array(
+				'alpha'         => 2,
+				'current_color' => $this->_current_colors['alpha_color_reset_clear'],
+				'default_color' => $this->_defaults_colors['alpha_color_reset_clear'],
+				'name'          => 'alpha_color_reset_clear',
 			)
 		);
 	}
@@ -127,11 +150,11 @@ class ColorPickerAlphaTest {
 		}
 
 		if ( isset( $args['name'] ) )
-			printf( '<input type="text" class="color-picker"%1$s name="ColorPickerAlphaTest[%2$s]">', $attributes, $args['name'] );
+			printf( '<input type="text" class="color-picker"%1$s name="wp-color-picker-alpha[%2$s]">', $attributes, $args['name'] );
 	}
 
 	public function admin_enqueue_scripts( $hook ) {
-		if ( $this->_plugin != $hook )
+		if ( $this->_plugin_hook != $hook )
 			return;
 
 		wp_enqueue_style( 'wp-color-picker' );
@@ -139,6 +162,6 @@ class ColorPickerAlphaTest {
 	}
 
 	public static function deactivation() {
-		delete_option( 'ColorPickerAlphaTest' );
+		delete_option( 'wp-color-picker-alpha' );
 	}
 }
