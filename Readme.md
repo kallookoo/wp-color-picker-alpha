@@ -1,6 +1,6 @@
 # wp-color-picker-alpha
 Overwrite [Automattic Iris][1] for enabled Alpha Channel in wpColorPicker
-Overwrite [wpColorPicker][4] for better implementation of overwriting the Iris
+Overwrite [WordPress Color Picker][4] for better implementation of overwriting the Iris
 
 Only run in input and is defined data alpha in true
 
@@ -61,3 +61,4 @@ Initial Release
 [1]: http://automattic.github.io/Iris/
 [2]: https://github.com/23r9i0/wp-color-picker-alpha/issues
 [3]: https://github.com/23r9i0/wp-color-picker-alpha/pulls
+[4]: https://github.com/WordPress/WordPress/blob/master/wp-admin/js/color-picker.js
