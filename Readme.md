@@ -55,7 +55,7 @@ If only tested in Firefox last version and WordPress last version
  * Fixed issue [#1](../../issues/1)
  * Show Iris error always, but if not is empty input
  * Fixed option reset, not reset in first time
- * Fixed width input with data alpha is true
+ * Fixed width input with data alpha is true and plugin initialize
 
 ###### v1.0.0
 Initial Release
