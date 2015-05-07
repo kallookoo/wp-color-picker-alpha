@@ -6,7 +6,8 @@
  * Version: 1.0
  * Author: Sergio P.A. ( 23r9i0 )
  * Author URI: http://dsergio.com/
- * License: GPL2
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 defined( 'ABSPATH' ) or exit;
@@ -150,15 +151,14 @@ class WP_Color_Picker_Alpha {
 		}
 
 		if ( isset( $args['name'] ) )
-			printf( '<input type="text" class="color-picker"%1$s name="wp-color-picker-alpha[%2$s]">', $attributes, $args['name'] );
+			printf( '<input type="text" class="color-picker" name="wp-color-picker-alpha[12$s]%2$s">', $args['name'], $attributes );
 	}
 
 	public function admin_enqueue_scripts( $hook ) {
-		if ( $this->_plugin_hook != $hook )
-			return;
-
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_script( 'wp-color-picker-alpha', plugins_url( 'wp-color-picker-alpha.js', __FILE__ ), array( 'wp-color-picker' ), time() );
+		if ( $this->_plugin_hook === $hook ) {
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'wp-color-picker-alpha', plugins_url( 'wp-color-picker-alpha.js', __FILE__ ), array( 'wp-color-picker' ), time() );
+		}
 	}
 
 	public static function deactivation() {
