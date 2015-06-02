@@ -151,7 +151,7 @@ class WP_Color_Picker_Alpha {
 		}
 
 		if ( isset( $args['name'] ) )
-			printf( '<input type="text" class="color-picker" name="wp-color-picker-alpha[12$s]%2$s">', $args['name'], $attributes );
+			printf( '<input type="text" class="color-picker" name="wp-color-picker-alpha[%1$s]"%2$s>', $args['name'], $attributes );
 	}
 
 	public function admin_enqueue_scripts( $hook ) {
