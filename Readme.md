@@ -49,7 +49,7 @@ If only tested in Firefox last version and WordPress last version
 
 ## Changelog
 ###### v1.2
- * Add functionality to change the width of the element, see [#1](../../issues/2)
+ * Add functionality to change the width of the element, see [#2](../../issues/2)
 
 ###### v1.1
  * Fixed issue [#1](../../issues/1)
