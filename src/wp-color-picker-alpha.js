@@ -198,14 +198,6 @@
                         aSlider: aSlider
                     };
 
-                // Set default width for input reset
-                self.options.defaultWidth = el.width();
-
-                // Update width for input
-                if ( self._color._alpha < 1 || self._color.toString().indexOf('rgb') != 1 ) {
-                    el.width( parseInt( self.options.defaultWidth+100 ) );
-                }
-
                 // Push new controls
                 $.each( controls, function( k, v ){
                     self.controls[k] = v;
@@ -262,7 +254,6 @@
                         'rgb(' + color.r + ',' + color.g + ',' + color.b + ') 0%',
                         'rgba(' + color.r + ',' + color.g + ',' + color.b + ', 0) 100%'
                     ],
-                    defaultWidth = self.options.defaultWidth,
                     target = self.picker.closest('.wp-picker-container').find( '.wp-color-result' );
 
                 // Generate background slider alpha, only for CSS3 old browser fuck!! :)
@@ -280,10 +271,6 @@
                         var style = controls.strip.attr( 'style' ).replace( /rgba\(([0-9]+,)(\s+)?([0-9]+,)(\s+)?([0-9]+)(,(\s+)?[0-9\.]+)\)/g, 'rgb($1$3$5)' );
 
                         controls.strip.attr( 'style', style );
-
-                        el.width( parseInt( defaultWidth+100 ) );
-                    } else {
-                        el.width( defaultWidth );
                     }
                 }
             }
