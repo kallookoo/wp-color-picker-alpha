@@ -19,7 +19,7 @@ Download and copy script inside folder dist in you theme options or plugin.
 For call this script use this code:
 ```
 wp_enqueue_style( 'wp-color-picker' );
-wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '1.1', $in_footer );
+wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '1.2', $in_footer );
 ```
 
 ## Usage
@@ -28,21 +28,13 @@ Add class `.color-picker` and `data-alpha="true"` in input.
 > This class is optional but then need to call wpColorPicker yourself to the class you want.
 
 ###### Optional
-Add `data-reset-alpha="true"` for set Alpha Channel for disabled transparency after press color palette.
+ * data-reset-alpha:
+  * For set Alpha Channel for disabled transparency after press color palette.
 
-###### Examples
-```
-<input type="text" class="color-picker" data-alpha="true">
-<input type="text" class="color-picker" data-alpha="true" data-reset-alpha="true">
-<input type="text" class="color-picker" value="#ffbc00" data-alpha="true">
-<input type="text" class="color-picker" value="#ffbc00" data-alpha="true" data-reset-alpha="true">
-<input type="text" class="color-picker" value="rgba(255,0,0,0.25)" data-alpha="true">
-<input type="text" class="color-picker" value="rgba(255,0,0,0.25)" data-alpha="true" data-reset-alpha="true">
-<input type="text" class="color-picker" data-default-color="#ffbc00" value="#ffbc00" data-alpha="true">
-<input type="text" class="color-picker" data-default-color="#ffbc00" value="#ffbc00" data-alpha="true" data-reset-alpha="true">
-<input type="text" class="color-picker" data-default-color="rgba(255,0,0,0.25)" value="#ffbc00" data-alpha="true">
-<input type="text" class="color-picker" data-default-color="rgba(255,0,0,0.25)" value="#ffbc00" data-alpha="true" data-reset-alpha="true">
-```
+ * data-custom-width:
+  * By default the input width is 100 on rgba mode
+  * For disabled default input witdh in mode rgba ( Possible values: "false", "0" )
+  * For change default input width in mode rgba ( change the number you want, "in pixels" )
 
 ## License
 Copyright (c) 2015 Sergio P.A. (23r9i0).
@@ -56,6 +48,9 @@ If you would like to contribute please fork the project and [report bugs][2] or 
 If only tested in Firefox last version and WordPress last version
 
 ## Changelog
+###### v1.2
+ * Add functionality to change the width of the element, see [#1](../../issues/2)
+
 ###### v1.1
  * Fixed issue [#1](../../issues/1)
  * Show Iris error always, but if not is empty input
