@@ -207,7 +207,7 @@
 				self.options.defaultWidth = el.width();
 
 				// Update width for input
-				if ( self._color._alpha < 1 || self._color.toString().indexOf('rgb') != 1 ) {
+				if ( self._color._alpha < 1 || self._color.toString().indexOf('rgb') != -1 ) {
 					el.width( parseInt( self.options.defaultWidth + self.options.customWidth ) );
 				}
 
