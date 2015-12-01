@@ -31,11 +31,8 @@
 		if ( this.error )
 			return '';
 
-		if ( hex.length < 6 ) {
-			for ( var i = 6 - hex.length - 1; i >= 0; i-- ) {
-				hex = '0' + hex;
-			}
-		}
+		if ( hex.length < 6 )
+			hex = ( '00000' + hex ).substr( -6 );
 
 		return '#' + hex;
 	};
@@ -63,7 +60,7 @@
 			// Set up HTML structure, hide things
 			el.addClass( 'wp-color-picker' ).hide().wrap( _wrap );
 			self.wrap = el.parent();
-			self.toggler = $( _before ).insertBefore( el ).css( { backgroundColor: self.initialValue } ).attr( 'title', wpColorPickerL10n.pick ).attr( 'data-current', wpColorPickerL10n.current );
+			self.toggler = $( _before ).insertBefore( el ).css( { backgroundColor: self.initialValue } ).attr( 'title', wpColorPickerL10n.pick ).data( 'current', wpColorPickerL10n.current );
 			self.pickerContainer = $( _after ).insertAfter( el );
 			self.button = $( _button );
 
@@ -210,7 +207,7 @@
 				self.options.defaultWidth = el.width();
 
 				// Update width for input
-				if ( self._color._alpha < 1 || self._color.toString().indexOf('rgb') != 1 ) {
+				if ( self._color._alpha < 1 || self._color.toString().indexOf('rgb') != -1 ) {
 					el.width( parseInt( self.options.defaultWidth + self.options.customWidth ) );
 				}
 
