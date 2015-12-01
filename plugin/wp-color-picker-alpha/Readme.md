@@ -8,7 +8,7 @@ Licensed under the GPLv2 license.
 
 ## Changelog
 
-###### v1.1
+###### v1.2.1
 Update script
 
 ###### v1.1
