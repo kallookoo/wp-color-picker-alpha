@@ -48,6 +48,9 @@ If you would like to contribute please fork the project and [report bugs][2] or 
 If only tested in Firefox last version and WordPress last version
 
 ## Changelog
+###### v1.2.1
+ * Pull, see [#4](../../pull/4)
+
 ###### v1.2
  * Add functionality to change the width of the element, see [#2](../../issues/2)
 
