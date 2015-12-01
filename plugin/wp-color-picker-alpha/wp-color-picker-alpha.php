@@ -3,7 +3,7 @@
  * Plugin Name: WP Color Picker Alpha
  * Plugin URI: https://github.com/23r9i0/wp-color-picker-alpha
  * Description: Plugin to test wp-color-picker-alpha script
- * Version: 1..1
+ * Version: 1.2.1
  * Author: Sergio P.A. ( 23r9i0 )
  * Author URI: http://dsergio.com/
  * License: GPLv2 or later
