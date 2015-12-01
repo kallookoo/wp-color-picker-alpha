@@ -58,13 +58,8 @@
 
 			// Set up HTML structure, hide things
 			el.addClass( 'wp-color-picker' ).hide().wrap( _wrap );
-<<<<<<< HEAD
 			self.wrap            = el.parent();
 			self.toggler         = $( _before ).insertBefore( el ).css( { backgroundColor : self.initialValue } ).attr( 'title', wpColorPickerL10n.pick ).data( 'current', wpColorPickerL10n.current );
-=======
-			self.wrap = el.parent();
-			self.toggler = $( _before ).insertBefore( el ).css( { backgroundColor: self.initialValue } ).attr( 'title', wpColorPickerL10n.pick ).data( 'current', wpColorPickerL10n.current );
->>>>>>> origin/master
 			self.pickerContainer = $( _after ).insertAfter( el );
 			self.button          = $( _button );
 
@@ -206,11 +201,7 @@
 				self.options.defaultWidth = el.width();
 
 				// Update width for input
-<<<<<<< HEAD
 				if ( self._color._alpha < 1 || self._color.toString().indexOf('rgb') != -1 )
-=======
-				if ( self._color._alpha < 1 || self._color.toString().indexOf('rgb') != -1 ) {
->>>>>>> origin/master
 					el.width( parseInt( self.options.defaultWidth + self.options.customWidth ) );
 
 				// Push new controls
@@ -340,10 +331,5 @@
 
 // Auto Call plugin is class is color-picker
 jQuery( document ).ready( function( $ ) {
-<<<<<<< HEAD
 	$( '.color-picker' ).wpColorPicker();
 } );
-=======
-  $( '.color-picker' ).wpColorPicker();
-} );
->>>>>>> origin/master
