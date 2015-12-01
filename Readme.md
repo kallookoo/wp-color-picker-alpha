@@ -49,9 +49,6 @@ If only tested in Firefox last version and WordPress last version
 
 ## Changelog
 ###### v1.2
- * Update script, see [#2](../../pull/4)
-
-###### v1.2
  * Add functionality to change the width of the element, see [#2](../../issues/2)
 
 ###### v1.1

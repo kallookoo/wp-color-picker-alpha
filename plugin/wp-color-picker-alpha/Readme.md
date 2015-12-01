@@ -9,9 +9,6 @@ Licensed under the GPLv2 license.
 ## Changelog
 
 ###### v1.1
-Update script
-
-###### v1.1
 Add more options to test
 
 ###### v1.0
