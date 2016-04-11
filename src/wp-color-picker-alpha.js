@@ -1,10 +1,10 @@
-/**
+/**!
  * wp-color-picker-alpha
  *
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 1.2.1
+ * Version: 1.2.2
  * https://github.com/23r9i0/wp-color-picker-alpha
  * Copyright (c) 2015 Sergio P.A. (23r9i0).
  * Licensed under the GPLv2 license.
@@ -47,7 +47,7 @@
 				return;
 
 			var self = this,
-				el   = self.element;
+					el   = self.element;
 
 			$.extend( self.options, el.data() );
 
@@ -59,7 +59,7 @@
 			// Set up HTML structure, hide things
 			el.addClass( 'wp-color-picker' ).hide().wrap( _wrap );
 			self.wrap            = el.parent();
-			self.toggler         = $( _before ).insertBefore( el ).css( { backgroundColor : self.initialValue } ).attr( 'title', wpColorPickerL10n.pick ).data( 'current', wpColorPickerL10n.current );
+			self.toggler         = $( _before ).insertBefore( el ).css( { backgroundColor : self.initialValue } ).attr( 'title', wpColorPickerL10n.pick ).attr( 'data-current', wpColorPickerL10n.current );
 			self.pickerContainer = $( _after ).insertAfter( el );
 			self.button          = $( _button );
 
@@ -103,8 +103,9 @@
 			el.val( self.initialValue );
 			self._addListeners();
 
-			if ( ! self.options.hide )
+			if ( ! self.options.hide ) {
 				self.toggler.click();
+			}
 		},
 		_addListeners: function() {
 			var self = this;

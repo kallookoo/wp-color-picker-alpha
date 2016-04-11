@@ -3,7 +3,7 @@
  * Plugin Name: WP Color Picker Alpha
  * Plugin URI: https://github.com/23r9i0/wp-color-picker-alpha
  * Description: Plugin to test wp-color-picker-alpha script
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author: Sergio P.A. ( 23r9i0 )
  * Author URI: http://dsergio.com/
  * License: GPLv2 or later
@@ -11,9 +11,6 @@
  */
 
 defined( 'ABSPATH' ) or exit;
-
-add_action( 'plugins_loaded', 'WP_Color_Picker_Alpha::instance' );
-register_deactivation_hook( __FILE__, 'WP_Color_Picker_Alpha::deactivation' );
 
 class WP_Color_Picker_Alpha {
 
@@ -186,3 +183,6 @@ class WP_Color_Picker_Alpha {
 		delete_option( 'wp-color-picker-alpha' );
 	}
 }
+
+add_action( 'plugins_loaded', 'WP_Color_Picker_Alpha::instance' );
+register_deactivation_hook( __FILE__, 'WP_Color_Picker_Alpha::deactivation' );

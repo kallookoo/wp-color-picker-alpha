@@ -19,7 +19,7 @@ Download and copy script inside folder dist in you theme options or plugin.
 For call this script use this code:
 ```
 wp_enqueue_style( 'wp-color-picker' );
-wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '1.2', $in_footer );
+wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '1.2.2', $in_footer );
 ```
 
 ## Usage
@@ -45,9 +45,11 @@ Licensed under the GPLv2 license.
 If you would like to contribute please fork the project and [report bugs][2] or submit [pull requests][3].
 
 ## Tested
-If only tested in Firefox last version and WordPress last version
+If only tested in Firefox and WordPress last versions
 
 ## Changelog
+###### v1.2.2
+ * Pull, see [#7](../../pull/7)
 ###### v1.2.1
  * Pull, see [#4](../../pull/4)
 
