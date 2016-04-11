@@ -50,6 +50,7 @@ If only tested in Firefox and WordPress last versions
 ## Changelog
 ###### v1.2.2
  * Pull, see [#7](../../pull/7)
+
 ###### v1.2.1
  * Pull, see [#4](../../pull/4)
 
