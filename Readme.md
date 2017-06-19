@@ -47,6 +47,10 @@ If you would like to contribute please fork the project and [report bugs][2] or 
 ## Tested
 If only tested in Firefox and WordPress last versions
 
+## Testing
+For only testing download or clone [wp-color-picker-alpha-plugin](https://github.com/kallookoo/wp-color-picker-alpha-plugin) inside WordPress plugins folder and activate.
+
+
 ## Changelog
 ###### v1.2.2
  * Pull, see [#7](../../pull/7)
