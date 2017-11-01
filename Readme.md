@@ -19,7 +19,7 @@ Download and copy script inside folder dist in you theme options or plugin.
 For call this script use this code:
 ```
 wp_enqueue_style( 'wp-color-picker' );
-wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '1.2.2', $in_footer );
+wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '2.0', $in_footer );
 ```
 
 ## Usage
@@ -37,8 +37,6 @@ Add class `.color-picker` and `data-alpha="true"` in input.
   * For change default input width in mode rgba ( change the number you want, "in pixels" )
 
 ## License
-Copyright (c) 2015 Sergio P.A. (23r9i0).
-
 Licensed under the GPLv2 license.
 
 ## Support
@@ -52,6 +50,9 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
 
 
 ## Changelog
+###### v2.0
+ * Add support for WordPress 4.9, also works in lower versions, only tested in version 4.8
+
 ###### v1.2.2
  * Pull, see [#7](../../pull/7)
 
