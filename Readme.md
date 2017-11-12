@@ -50,6 +50,12 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
 
 
 ## Changelog
+###### v2.1
+ * Resolve issues with wp-color-picker.css, see [#12](../../pull/12)
+  > The variable wpColorPickerL10n is used to check if it is earlier than version 4.9 and adjusts the content,
+  > only tested in 4.8.3 and 4.9-RC2-42156.
+
+
 ###### v2.0
  * Add support for WordPress 4.9, also works in lower versions, only tested in version 4.8
 
@@ -73,6 +79,6 @@ Initial Release
 
 
 [1]: http://automattic.github.io/Iris/
-[2]: https://github.com/23r9i0/wp-color-picker-alpha/issues
-[3]: https://github.com/23r9i0/wp-color-picker-alpha/pulls
+[2]: https://github.com/kallookoo/wp-color-picker-alpha/issues
+[3]: https://github.com/kallookoo/wp-color-picker-alpha/pulls
 [4]: https://github.com/WordPress/WordPress/blob/master/wp-admin/js/color-picker.js
