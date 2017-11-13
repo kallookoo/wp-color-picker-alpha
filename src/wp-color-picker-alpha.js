@@ -4,7 +4,7 @@
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 2.1
+ * Version: 2.1.1
  * https://github.com/kallookoo/wp-color-picker-alpha
  * Licensed under the GPLv2 license.
  */
@@ -19,7 +19,7 @@
 		_wrappingLabel = '<label></label>',
 		_wrappingLabelText = '<span class="screen-reader-text"></span>';
 		// Prevent CSS issues in < WordPress 4.9
-		_deprecated = ( wpColorPickerL10n.current.length = -1 );
+		_deprecated = ( typeof wpColorPickerL10n.current !== 'undefined' );
 
 		if ( _deprecated ) {
 			_before = '<a tabindex="0" class="wp-color-result" />';
@@ -175,8 +175,9 @@
 				 */
 				change: function( event, ui ) {
 					if ( self.options.alpha ) {
+						self.toggler.css( { 'background-image' : 'url(' + image + ')' } );
 						if ( _deprecated ) {
-							self.toggler.css( { 'background-image' : 'url(' + image + ')' } ).html( '<span class="color-alpha" />' );
+							self.toggler.html( '<span class="color-alpha" />' );
 						} else {
 							self.toggler.css( {
 								'position' : 'relative'

@@ -50,6 +50,9 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
 
 
 ## Changelog
+###### v2.1.1
+ * Change method to check WordPresss version
+
 ###### v2.1
  * Resolve issues with wp-color-picker.css, see [#12](../../pull/12)
   > The variable wpColorPickerL10n is used to check if it is earlier than version 4.9 and adjusts the content,
