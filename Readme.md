@@ -50,8 +50,12 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
 
 
 ## Changelog
+###### v2.1.2
+ * Declare some global variables when is deprecated or not
+ * Change method to check WordPress version, recommended by @webaware, see [comments][5]
+
 ###### v2.1.1
- * Change method to check WordPresss version
+ * Change method to check WordPress version
 
 ###### v2.1
  * Resolve issues with wp-color-picker.css, see [#12](../../pull/12)
@@ -85,3 +89,4 @@ Initial Release
 [2]: https://github.com/kallookoo/wp-color-picker-alpha/issues
 [3]: https://github.com/kallookoo/wp-color-picker-alpha/pulls
 [4]: https://github.com/WordPress/WordPress/blob/master/wp-admin/js/color-picker.js
+[5]: https://github.com/kallookoo/wp-color-picker-alpha/commit/41fe4dfa0aa5abe98e905075c1b98ceff39fd704#commitcomment-25592012
