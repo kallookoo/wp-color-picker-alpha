@@ -4,25 +4,26 @@
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 2.1.1
+ * Version: 2.1.2
  * https://github.com/kallookoo/wp-color-picker-alpha
  * Licensed under the GPLv2 license.
  */
 ( function( $ ) {
-	// Variable for some backgrounds ( grid )
+		// Variable for some backgrounds ( grid )
 	var image   = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==',
-	// html stuff for wpColorPicker copy of the original color-picker.js
-		_before = '<button type="button" class="button wp-color-result" aria-expanded="false"><span class="wp-color-result-text"></span></button>',
+		// html stuff for wpColorPicker copy of the original color-picker.js
 		_after = '<div class="wp-picker-holder" />',
 		_wrap = '<div class="wp-picker-container" />',
 		_button = '<input type="button" class="button button-small" />',
-		_wrappingLabel = '<label></label>',
-		_wrappingLabelText = '<span class="screen-reader-text"></span>';
 		// Prevent CSS issues in < WordPress 4.9
-		_deprecated = ( typeof wpColorPickerL10n.current !== 'undefined' );
-
+		_deprecated = ( wpColorPickerL10n.current !== undefined );
+		// Declare some global variables when is deprecated or not
 		if ( _deprecated ) {
-			_before = '<a tabindex="0" class="wp-color-result" />';
+			var _before = '<a tabindex="0" class="wp-color-result" />';
+		} else {
+			var _before = '<button type="button" class="button wp-color-result" aria-expanded="false"><span class="wp-color-result-text"></span></button>',
+				_wrappingLabel = '<label></label>',
+				_wrappingLabelText = '<span class="screen-reader-text"></span>';
 		}
 	/**
 	 * Overwrite Color
@@ -86,7 +87,11 @@
 			if ( _deprecated ) {
 				el.hide().wrap( _wrap );
 				self.wrap            = el.parent();
-				self.toggler         = $( _before ).insertBefore( el ).css( { backgroundColor : self.initialValue } ).attr( 'title', wpColorPickerL10n.pick ).attr( 'data-current', wpColorPickerL10n.current );
+				self.toggler         = $( _before )
+					.insertBefore( el )
+					.css( { backgroundColor : self.initialValue } )
+					.attr( 'title', wpColorPickerL10n.pick )
+					.attr( 'data-current', wpColorPickerL10n.current );
 				self.pickerContainer = $( _after ).insertAfter( el );
 				self.button          = $( _button ).addClass('hidden');
 			} else {
