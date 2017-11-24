@@ -14,7 +14,7 @@
 ![wpcolorpicker-02](https://cloud.githubusercontent.com/assets/747817/5768335/17eae354-9d10-11e4-95cf-14868124309c.png)
 ![wpcolorpicker-03](https://cloud.githubusercontent.com/assets/747817/5768336/1b6ff956-9d10-11e4-80e1-7bcf3fde8ea8.png)
 
-## Instalation
+## Installation
 Download and copy script inside folder dist in you theme options or plugin.
 For call this script use this code:
 ```
