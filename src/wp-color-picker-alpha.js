@@ -4,11 +4,16 @@
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 2.1.2
+ * Version: 2.1.3
  * https://github.com/kallookoo/wp-color-picker-alpha
  * Licensed under the GPLv2 license.
  */
 ( function( $ ) {
+	// Prevent double-init.
+	if ( $.wp.wpColorPicker.prototype._hasAlpha ) {
+		return;
+	}
+
 		// Variable for some backgrounds ( grid )
 	var image   = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAAHnlligAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHJJREFUeNpi+P///4EDBxiAGMgCCCAGFB5AADGCRBgYDh48CCRZIJS9vT2QBAggFBkmBiSAogxFBiCAoHogAKIKAlBUYTELAiAmEtABEECk20G6BOmuIl0CIMBQ/IEMkO0myiSSraaaBhZcbkUOs0HuBwDplz5uFJ3Z4gAAAABJRU5ErkJggg==',
 		// html stuff for wpColorPicker copy of the original color-picker.js
@@ -48,6 +53,7 @@
 	 * Overwrite wpColorPicker
 	 */
 	$.widget( 'wp.wpColorPicker', $.wp.wpColorPicker, {
+		_hasAlpha: true,
 		/**
 		 * @summary Creates the color picker.
 		 *
