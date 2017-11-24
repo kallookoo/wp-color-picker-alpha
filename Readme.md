@@ -19,7 +19,7 @@ Download and copy script inside folder dist in you theme options or plugin.
 For call this script use this code:
 ```
 wp_enqueue_style( 'wp-color-picker' );
-wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), '2.0', $in_footer );
+wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), $current_version, $in_footer );
 ```
 
 ## Usage
@@ -50,6 +50,9 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
 
 
 ## Changelog
+###### v2.1.3
+ * Fix issue [#13](../../pull/13), Thanks for @jtsternberg, see [#15](../../pull/15)
+ 
 ###### v2.1.2
  * Declare some global variables when is deprecated or not
  * Change method to check WordPress version, recommended by @webaware, see [comments][5]
@@ -61,7 +64,6 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
  * Resolve issues with wp-color-picker.css, see [#12](../../pull/12)
   > The variable wpColorPickerL10n is used to check if it is earlier than version 4.9 and adjusts the content,
   > only tested in 4.8.3 and 4.9-RC2-42156.
-
 
 ###### v2.0
  * Add support for WordPress 4.9, also works in lower versions, only tested in version 4.8
