@@ -320,6 +320,7 @@
 					if ( $.isFunction( self.options.clear ) )
 						self.options.clear.call( this, event );
 
+					self.element.trigger( 'change' );
 				} else if ( $( this ).hasClass( 'wp-picker-default' ) ) {
 					self.element.val( self.options.defaultColor ).change();
 				}
@@ -455,6 +456,7 @@
 					self._change();
 				} );
 			}
+			el.trigger( 'change' );
 		},
 		_addInputListeners: function( input ) {
 			var self            = this,
