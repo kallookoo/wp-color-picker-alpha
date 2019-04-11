@@ -37,7 +37,7 @@ Add class `.color-picker` and `data-alpha="true"` in input.
   * For change default input width in mode rgba ( change the number you want, "in pixels" )
 
 ## License
-Licensed under the GPLv2 license.
+Licensed under the GPLv3 license.
 
 ## Support
 If you would like to contribute please fork the project and [report bugs][2] or submit [pull requests][3].
