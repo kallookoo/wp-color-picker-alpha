@@ -6,7 +6,7 @@
  *
  * Version: 2.1.3
  * https://github.com/kallookoo/wp-color-picker-alpha
- * Licensed under the GPLv2 license.
+ * Licensed under the GPLv2 license or later.
  */
 ( function( $ ) {
 	// Prevent double-init.
