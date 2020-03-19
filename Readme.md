@@ -50,6 +50,9 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
 
 
 ## Changelog
+###### v2.1.4
+ * Fix issue [#31](../../issues/31), Thanks for @webaware
+
 ###### v2.1.3
  * Fix issue [#13](../../pull/13), Thanks for @jtsternberg, see [#15](../../pull/15)
  
