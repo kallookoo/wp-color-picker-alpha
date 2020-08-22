@@ -20,14 +20,14 @@
 		_after = '<div class="wp-picker-holder" />',
 		_wrap = '<div class="wp-picker-container" />',
 		_button = '<input type="button" class="button button-small" />',
-		_deprecated = false;
+		_deprecated = false,
 		__ = wp.i18n.__;
 
 		// WP < 5.5
-		if (typeof wpColorPickerL10n !== "undefined" ) {
+		if ( "undefined" !== typeof wpColorPickerL10n  ) {
 			
 			// Prevent CSS issues in < WordPress 4.9
-			_deprecated = ( wpColorPickerL10n.current !== undefined );
+			_deprecated = ( undefined !== wpColorPickerL10n.current  );
 		}
 		
 		// Declare some global variables when is deprecated or not
