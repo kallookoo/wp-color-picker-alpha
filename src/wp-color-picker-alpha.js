@@ -20,15 +20,35 @@
 		_after = '<div class="wp-picker-holder" />',
 		_wrap = '<div class="wp-picker-container" />',
 		_button = '<input type="button" class="button button-small" />',
-		// Prevent CSS issues in < WordPress 4.9
-		_deprecated = ( wpColorPickerL10n.current !== undefined );
-		// Declare some global variables when is deprecated or not
-		if ( _deprecated ) {
-			var _before = '<a tabindex="0" class="wp-color-result" />';
+		_before = '<button type="button" class="button wp-color-result" aria-expanded="false"><span class="wp-color-result-text"></span></button>',
+		_wrappingLabel = '<label></label>',
+		_wrappingLabelText = '<span class="screen-reader-text"></span>',
+		_deprecated = false;
+		// Check if wpColorPickerL10n is defined
+		if ( typeof wpColorPickerL10n !== "undefined" ) {
+			// wpColorPickerL10n is defined in <= WordPress 5.4
+			// Prevent CSS issues in < WordPress 4.9. current can only be checked if we know wpColorPickerL10n is defined
+			_deprecated = ( typeof wpColorPickerL10n.current !== "undefined" );
+			if ( _deprecated ) {
+				// Update _before if wpColorPickerL10n.current is defined (< WP 4.9)
+				_before = '<a tabindex="0" class="wp-color-result" />';
+			}
+
+			var	_colorValue = wpColorPickerL10n.defaultLabel,
+				_selectColor = wpColorPickerL10n.pick,
+				_defaultString = wpColorPickerL10n.defaultString,
+				_defaultAriaLabel = wpColorPickerL10n.defaultAriaLabel,
+				_clearString = wpColorPickerL10n.clear,
+				_clearAriaLabel = wpColorPickerL10n.clearAriaLabel;
 		} else {
-			var _before = '<button type="button" class="button wp-color-result" aria-expanded="false"><span class="wp-color-result-text"></span></button>',
-				_wrappingLabel = '<label></label>',
-				_wrappingLabelText = '<span class="screen-reader-text"></span>';
+			// wpColorPickerL10n is not defined in WordPress 5.5+
+			var __ = wp.i18n.__,
+				_colorValue = __( 'Color value' ),
+				_selectColor = __( 'Select Color' ),
+				_defaultString = __( 'Default' ),
+				_defaultAriaLabel = __( 'Select default color' ),
+				_clearString = __( 'Clear' ),
+				_clearAriaLabel = __( 'Clear color' );
 		}
 	/**
 	 * Overwrite Color
@@ -96,7 +116,7 @@
 				self.toggler         = $( _before )
 					.insertBefore( el )
 					.css( { backgroundColor : self.initialValue } )
-					.attr( 'title', wpColorPickerL10n.pick )
+					.attr( 'title', _selectColor )
 					.attr( 'data-current', wpColorPickerL10n.current );
 				self.pickerContainer = $( _after ).insertAfter( el );
 				self.button          = $( _button ).addClass('hidden');
@@ -111,7 +131,7 @@
 					// Insert the default label text.
 					self.wrappingLabelText = $( _wrappingLabelText )
 						.insertBefore( el )
-						.text( wpColorPickerL10n.defaultLabel );
+						.text( _colorValue );
 				}
 
 				/*
@@ -129,7 +149,7 @@
 					.insertBefore( self.wrappingLabel )
 					.css( { backgroundColor: self.initialValue } );
 				// Set the toggle button span element text.
-				self.toggler.find( '.wp-color-result-text' ).text( wpColorPickerL10n.pick );
+				self.toggler.find( '.wp-color-result-text' ).text( _selectColor );
 				// Set up the Iris container and insert it after the wrapping label.
 				self.pickerContainer = $( _after ).insertAfter( self.wrappingLabel );
 				// Store a reference to the Clear/Default button.
@@ -138,14 +158,14 @@
 
 			// Set up the Clear/Default button.
 			if ( self.options.defaultColor ) {
-				self.button.addClass( 'wp-picker-default' ).val( wpColorPickerL10n.defaultString );
+				self.button.addClass( 'wp-picker-default' ).val( _defaultString );
 				if ( ! _deprecated ) {
-					self.button.attr( 'aria-label', wpColorPickerL10n.defaultAriaLabel );
+					self.button.attr( 'aria-label', _defaultAriaLabel );
 				}
 			} else {
-				self.button.addClass( 'wp-picker-clear' ).val( wpColorPickerL10n.clear );
+				self.button.addClass( 'wp-picker-clear' ).val( _clearString );
 				if ( ! _deprecated ) {
-					self.button.attr( 'aria-label', wpColorPickerL10n.clearAriaLabel );
+					self.button.attr( 'aria-label', _clearAriaLabel );
 				}
 			}
 
