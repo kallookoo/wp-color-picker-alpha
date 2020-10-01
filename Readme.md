@@ -4,6 +4,8 @@
 
 > Only run in input and is defined data alpha in true
 
+# IMPORTANT: This version change the data's and is one RC.
+
 ## Screenshots
 ###### wpColorPicker
 
@@ -23,18 +25,23 @@ wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-pic
 ```
 
 ## Usage
-Add class `.color-picker` and `data-alpha="true"` in input.
+Add class `.color-picker` and `data-alpha-enabled="true"` in input.
 
 > This class is optional but then need to call wpColorPicker yourself to the class you want.
 
 ###### Optional
- * data-reset-alpha:
+ * data-alpha-reset:
   * For set Alpha Channel for disabled transparency after press color palette.
 
- * data-custom-width:
+ * data-alpha-custom-width:
   * By default the input width is 100 on rgba mode
   * For disabled default input witdh in mode rgba ( Possible values: "false", "0" )
   * For change default input width in mode rgba ( change the number you want, "in pixels" )
+
+* data-alpha-color-type:
+ * To set the type of format; hex, rgb, hsl. Use the current or default color.
+   By default is rgb and if is hex change to rgba when the alpha channel is set.
+
 
 ## License
 Licensed under the GPLv2 license or later.
@@ -43,13 +50,16 @@ Licensed under the GPLv2 license or later.
 If you would like to contribute please fork the project and [report bugs][2] or submit [pull requests][3].
 
 ## Tested
-If only tested in Firefox and WordPress last versions
+If only tested in Firefox (Linux) and WordPress last versions
 
 ## Testing
 For only testing download or clone [wp-color-picker-alpha-plugin](https://github.com/kallookoo/wp-color-picker-alpha-plugin) inside WordPress plugins folder and activate.
 
 
 ## Changelog
+###### v3.0.0
+ * The RC for the new version, resolve various issues. 
+
 ###### v2.1.4
  * Fix issue [#31](../../issues/31), Thanks for @webaware
 
@@ -90,7 +100,7 @@ For only testing download or clone [wp-color-picker-alpha-plugin](https://github
 Initial Release
 
 
-[1]: http://automattic.github.io/Iris/
+[1]: https://automattic.github.io/Iris/
 [2]: https://github.com/kallookoo/wp-color-picker-alpha/issues
 [3]: https://github.com/kallookoo/wp-color-picker-alpha/pulls
 [4]: https://github.com/WordPress/WordPress/blob/master/wp-admin/js/color-picker.js
