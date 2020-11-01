@@ -30,18 +30,24 @@ Add class `.color-picker` and `data-alpha-enabled="true"` in input.
 
 > On previous versions of the 3.0.0 this script it starts automatically, but I have decided not to do it anymore.
 
-###### Optional
+### Optional
  * data-alpha-reset:
-  * For set Alpha Channel for disabled transparency after press color palette.
+ 
+   For set Alpha Channel for disabled transparency after press color palette.
 
  * data-alpha-custom-width:
-  * By default the input width is increased so that everything can be seen, with a value of 130 plus the original size.
-  * For change default input width ( change the number you want, "in pixels" )
-  * To disable this feature can also specify the value like "false" or "0".
+ 
+   By default the input width is increased so that everything can be seen, with a value of 130 plus the original size.
+   
+   For change default input width ( change the number you want, "in pixels" )
+   
+   To disable this feature can also specify the value like "false" or "0".
 
 * data-alpha-color-type:
- * To set the type of color format; hex, rgb, hsl. Use the current or default color.
-   By default is rgb and if is hex change to rgba when the alpha channel is set. It also supports rgba and hsla.
+  
+  To set the type of color format; hex, rgb, hsl. Use the current or default color.
+  
+  By default is rgb and if is hex change to rgba when the alpha channel is set. It also supports rgba and hsla.
 
 
 ## License
