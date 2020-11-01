@@ -30,16 +30,19 @@
 
 	// Create new method to replace the `Color.toString()` inside the scripts.
 	Color.fn.to_s = function( type ) {
-		type = ( type || 'rgb' );
+		type = ( type || 'hex' );
 		// Change hex to rgba to return the correct color.
 		if ( 'hex' === type && this._alpha < 1 ) {
-			type = 'rgb';
+			type = 'rgba';
 		}
 
-		/**
-		 * Possible types: rgb, hsl or hex
-		 */
-		return this.toCSS( type ).replace( /\s+/g, '' );
+		var color = '';
+		if ( 'hex' === type ) {
+			color = this.toString();
+		} else if ( ! this.error ) {
+			color = this.toCSS( type ).replace( /\(\s+/, '(' ).replace( /\s+\)/, ')' );
+		}
+		return color;
 	}
 
 	// Register the global variable.
@@ -55,14 +58,12 @@
 		/**
 		 * Alpha options
 		 *
+		 * @since 3.0.0
+		 *
 		 * @type {Object}
 		 */
 		alphaOptions: {
 			alphaEnabled: false,
-			alphaCustomWidth: 100,
-			alphaReset: false,
-			alphaColorType: 'hex',
-			isDeprecated: false,
 		},
 		/**
 		 * Get the current color or the new color.
@@ -74,14 +75,44 @@
 		 *
 		 * @return {string} The element's color.
 		 */
-		_getCurrentColor: function( color ) {
+		_getColor: function( color ) {
 			if ( color === undef ) {
 				color = this._color;
 			}
-			if ( this.alphaOptions.alphaEnabled  ) {
-				return color.to_s( this.alphaOptions.alphaColorType );
+
+			if ( this.alphaOptions.alphaEnabled ) {
+				color = color.to_s( this.alphaOptions.alphaColorType );
+				if ( ! this.alphaOptions.alphaColorWithSpace ) {
+					color = color.replace( /\s+/g, '' );
+				}
+				return color;
 			}
 			return color.toString();
+		},
+		/**
+		 * Create widget
+		 *
+		 * @since 3.0.0
+		 * @access private
+		 *
+		 * @return {void}
+		 */
+		_create: function() {
+			try {
+				// Try to get the wpColorPicker alpha options.
+				this.alphaOptions = this.element.wpColorPicker( 'instance' ).alphaOptions;
+			} catch( e ) {}
+
+			// We make sure there are all options
+			$.extend( {}, this.alphaOptions, {
+				alphaEnabled: false,
+				alphaCustomWidth: 130,
+				alphaReset: false,
+				alphaColorType: 'hex',
+				alphaColorWithSpace: false,
+			} );
+
+			this._super();
 		},
 		/**
 		 * Binds event listeners to the Iris.
@@ -98,25 +129,20 @@
 					var val = input.val(),
 						color = new Color( val ),
 						val = val.replace( /^(#|(rgb|hsl)a?)/, '' ),
-						type = ( self.alphaOptions.alphaColorType || 'hex' );
+						type = self.alphaOptions.alphaColorType;
 
 					input.removeClass( 'iris-error' );
-					// we gave a bad color
-					if ( color.error ) {
-						// don't error on an empty input - we want those allowed
-						if ( val !== '' ) {
-							input.addClass( 'iris-error' );
-						}
-					} else {
-						if ( ! ( color.toString() === self._color.toString() && color._alpha === self.color._alpha ) ) {
-							if ( event.type !== 'keyup' ) {
-								// let's not do this on keyup for hex shortcodes
-								if ( 'hex' === type && val.match( /^[0-9a-fA-F]{3}$/ ) ) {
-									return;
-								}
-								self._setOption( 'color', self._getCurrentColor( color ) );
+
+					if ( ! color.error ) {
+						// let's not do this on keyup for hex shortcodes
+						if ( 'hex' !== type || ! ( event.type === 'keyup' && val.match( /^[0-9a-fA-F]{3}$/ ) ) ) {
+							// Compare color ( #AARRGGBB )
+							if ( color.toIEOctoHex() !== self._color.toIEOctoHex() ) {
+								self._setOption( 'color', self._getColor( color ) );
 							}
 						}
+					} else if ( val !== '' ) {
+						input.addClass( 'iris-error' );
 					}
 				};
 
@@ -127,6 +153,52 @@
 				input.one( 'focus', function() {
 					self.show();
 				});
+			}
+		},
+		/**
+		 * Init Controls
+		 *
+		 * @since 3.0.0
+		 * @access private
+		 *
+		 * @return {void}
+		 */
+		_initControls: function() {
+			this._super();
+
+			if ( this.alphaOptions.alphaEnabled ) {
+				// Create Alpha controls
+				var self = this,
+					stripAlpha = self.controls.strip.clone(false, false),
+					stripAlphaSlider = stripAlpha.find( '.iris-slider-offset' ),
+					controls = {
+						stripAlpha       : stripAlpha,
+						stripAlphaSlider : stripAlphaSlider
+					};
+
+				stripAlpha.addClass( 'iris-strip-alpha' );
+				stripAlphaSlider.addClass( 'iris-slider-offset-alpha' );
+				stripAlpha.appendTo( self.picker.find( '.iris-picker-inner' ) );
+
+				// Push new controls
+				$.each( controls, function( k, v ) {
+					self.controls[k] = v;
+				} );
+
+				// Create slider
+				self.controls.stripAlphaSlider.slider( {
+					orientation : 'vertical',
+					min         : 0,
+					max         : 100,
+					step        : 1,
+					value       : parseInt( self._color._alpha * 100 ),
+					slide       : function( event, ui ) {
+						self.active = 'strip';
+						// Update alpha value
+						self._color._alpha = parseFloat( ui.value / 100 );
+						self._change.apply( self, arguments );
+					}
+				} );
 			}
 		},
 		/**
@@ -160,7 +232,7 @@
 				 * 20 for css left and right property
 				 * 2 for css border
 				 */
-				innerWidth = Math.round( self.picker.outerWidth(true) - ( opts.border ? 22 : 0 ) );
+				innerWidth = Math.round( self.picker.outerWidth( true ) - ( opts.border ? 22 : 0 ) );
 				// The width of the draggable, aka square.
 				squareWidth = Math.round( square.outerWidth() );
 				// The width for the sliders
@@ -172,7 +244,7 @@
 
 				// Check and change if necessary.
 				while ( totalWidth > innerWidth ) {
-					stripWidth = Math.round( stripWidth - 2.5 );
+					stripWidth = Math.round( stripWidth - 2 );
 					stripMargin = Math.round( stripMargin - 1 );
 					totalWidth = Math.round( squareWidth + ( stripWidth * 2 ) + ( stripMargin * 2 ) );
 				}
@@ -191,7 +263,7 @@
 		 * @return {void}
 		 */
 		_change: function() {
-			var self = this,
+			var self   = this,
 				active = self.active;
 
 			self._super();
@@ -206,8 +278,8 @@
 					],
 					target       = self.picker.closest( '.wp-picker-container' ).find( '.wp-color-result' );
 
-				self.options.color = self._getCurrentColor();
-				// Generate background slider alpha, only for CSS3 old browser fuck!! :)
+				self.options.color = self._getColor();
+				// Generate background slider alpha, only for CSS3.
 				controls.stripAlpha.css( { 'background' : 'linear-gradient(to bottom, ' + gradient.join( ', ' ) + '), url(' + backgroundImage + ')' } );
 				// Update alpha value
 				if ( active ) {
@@ -215,14 +287,14 @@
 				}
 
 				if ( ! self._color.error ) {
-					self.element.removeClass( 'iris-error' ).val( self._getCurrentColor() );
+					self.element.removeClass( 'iris-error' ).val( self.options.color );
 				}
 
 				self.picker.find( '.iris-palette-container' ).on( 'click.palette', '.iris-palette', function() {
 					var color = $( this ).data( 'color' );
 					if ( self.alphaOptions.alphaReset ) {
 						self._color._alpha = 1;
-						color = self._getCurrentColor();
+						color = self._getColor();
 					}
 					self._setOption( 'color', color );
 				} );
@@ -246,7 +318,7 @@
 			// Fix for slider hue opacity.
 			if ( self.alphaOptions.alphaEnabled && 'strip' === control ) {
 				color = self._color;
-				self._color = new Color( color.toString() ).setHSpace( self.options.mode );
+				self._color = new Color( color.toString() );
 				self.hue = self._color.h();
 			}
 
@@ -268,68 +340,15 @@
 		 * @return {void}
 		 */
 		_setOption: function( key, value ) {
-			var self = this,
-				el = self.element;
-
-			if ( 'alphaOptions' === key ) {
-				if ( typeof value === 'object' ) {
-					self.alphaOptions = $.extend( {}, self.alphaOptions, value );
-				}
-
-				if ( ! self.alphaOptions.alphaEnabled ) {
-					return;
-				}
-
-				// Update the width element
-				if ( self.alphaOptions.alphaCustomWidth ) {
-					el.width( parseInt( el.width() + self.alphaOptions.alphaCustomWidth, 10 ) );
-				}
-
-				// Create Alpha controls
-				var stripAlpha = self.controls.strip.clone(false, false),
-					stripAlphaSlider = stripAlpha.find( '.iris-slider-offset' ),
-					controls = {
-						stripAlpha       : stripAlpha,
-						stripAlphaSlider : stripAlphaSlider
-					};
-
-				stripAlpha.addClass( 'iris-strip-alpha' );
-				stripAlphaSlider.addClass( 'iris-slider-offset-alpha' );
-				stripAlpha.appendTo( self.picker.find( '.iris-picker-inner' ) );
-
-				// Push new controls
-				self.controls = $.extend( true, self.controls, controls );
-
-				// Create slider
-				self.controls.stripAlphaSlider.slider( {
-					orientation : 'vertical',
-					min         : 0,
-					max         : 100,
-					step        : 1,
-					value       : parseInt( self._color._alpha * 100 ),
-					slide       : function( event, ui ) {
-						self.active = 'strip';
-						// Update alpha value
-						self._color._alpha = parseFloat( ui.value / 100 );
-						self._change.apply( self, arguments );
-					}
-				} );
-
-				// Update dimensions
-				self._dimensions(true);
-
-				// Update with valid format of the current color
-				self._setOption( 'color', self._getCurrentColor() );
-
-
-			// Set the valid color in Alpha Mode.
-			} else if ( self.alphaOptions.alphaEnabled && 'color' === key ) {
+			var self = this;
+			if ( 'color' === key && self.alphaOptions.alphaEnabled ) {
 				// cast to string in case we have a number
 				value = '' + value;
 				newColor = new Color( value ).setHSpace( self.options.mode );
-				if ( ! newColor.error ) {
+				// Check if error && Check the color to prevent callbacks with the same color.
+				if ( ! newColor.error && self._getColor( newColor ) !== self._getColor() ) {
 					self._color = newColor;
-					self.options.color = self._getCurrentColor();
+					self.options.color = self._getColor();
 					self.active = 'external';
 					self._change();
 				}
@@ -351,10 +370,10 @@
 				return this._color.clone();
 			}
 			if ( newColor === undef ) {
-				return this._getCurrentColor();
+				return this._getColor();
 			}
 			this.option( 'color', newColor );
-		}
+		},
 	} );
 
 	/**
@@ -362,7 +381,74 @@
 	 */
 	$.widget( 'wp.wpColorPicker', $.wp.wpColorPicker, {
 		/**
-		 * Creates the color picker.
+		 * Alpha options
+		 *
+		 * @since 3.0.0
+		 *
+		 * @type {Object}
+		 */
+		alphaOptions: {
+			alphaEnabled: false,
+		},
+		/**
+		 * Get the alpha options.
+		 *
+		 * @since 3.0.0
+		 * @access private
+		 *
+		 * @return {object} The current alpha options.
+		 */
+		_getAlphaOptions: function() {
+			var el = this.element,
+				type  = ( el.data( 'type' ) || this.options.type ),
+				color = ( el.data( 'defaultColor' ) || el.val() ),
+				options = {
+					alphaEnabled: ( el.data( 'alphaEnabled' ) || false ),
+					alphaCustomWidth: 130,
+					alphaReset: false,
+					alphaColorType: 'rgb',
+					alphaColorWithSpace: false,
+				};
+
+			if ( options.alphaEnabled ) {
+				options.alphaEnabled = ( el.is( 'input' ) && 'full' === type );
+			}
+
+			if ( ! options.alphaEnabled ) {
+				return options;
+			}
+
+			options.alphaColorWithSpace = ( color && color.match( /\s/ ) );
+
+			$.each( options, function( name, defaultValue ) {
+				var value = ( el.data( name ) || defaultValue );
+				switch ( name ) {
+					case 'alphaCustomWidth':
+						value = ( value ? parseInt( value, 10 ) : 0 );
+						value = ( isNaN( value ) ? defaultValue : value );
+						break;
+					case 'alphaColorType':
+						if ( ! value.match( /^(hex|(rgb|hsl)a?)$/ ) ) {
+							if ( color && color.match( /^#/ ) ) {
+								value = 'hex';
+							} else if ( color && color.match( /^hsla?/ ) ) {
+								value = 'hsl';
+							} else {
+								value = defaultValue;
+							}
+						}
+						break;
+					default:
+						value = !!value;
+						break;
+				}
+				options[name] = value;
+			} );
+
+			return options;
+		},
+		/**
+		 * Create widget
 		 *
 		 * @since 3.0.0
 		 * @access private
@@ -370,24 +456,16 @@
 		 * @return {void}
 		 */
 		_create: function() {
-			/**
-			 * Define the defaults, it changes later.
-			 *
-			 * It is declared here because for some reason
-			 * when there are several instances the values
-			 * of the previous one are used.
-			 *
-			 * @type {Object}
-			 */
-			this._alphaOptions = {
-				alphaEnabled: false,
-				alphaCustomWidth: 100,
-				alphaReset: false,
-				alphaColorType: 'hex',
-				isDeprecated: false,
-			};
+			// Return early if Iris support is missing.
+			if ( ! $.support.iris ) {
+				return;
+			}
 
-			return this._super();
+			// Set the alpha options for the current instance.
+			this.alphaOptions = this._getAlphaOptions();
+
+			// Create widget.
+			this._super();
 		},
 		/**
 		 * Binds event listeners to the color picker and create options, etc...
@@ -398,81 +476,55 @@
 		 * @return {void}
 		 */
 		_addListeners: function() {
+			if ( ! this.alphaOptions.alphaEnabled ) {
+				return this._super();
+			}
+
 			var self = this,
-				el = self.element;
+				el = self.element,
+				isDeprecated = self.toggler.is( 'a' );
 
-			if ( ! ( 'alphaEnabled' in self.options && self.options.alphaEnabled ) ) {
-				return self._super();
+			this.alphaOptions.defaultWidth = el.width();
+			if ( this.alphaOptions.alphaCustomWidth ) {
+				el.width( parseInt( this.alphaOptions.defaultWidth + this.alphaOptions.alphaCustomWidth, 10 ) );
 			}
 
-			// Check if valid to prevent errors.
-			if ( ! ( self.options.alphaEnabled && el.is( 'input' ) && self.options.type === 'full' ) ) {
-				return self._super();
-			}
-
-			var options = {
-				alphaEnabled: true,
-				isDeprecated: self.toggler.is( 'a' ),
-			};
-
-			$.each( self._alphaOptions, function( k, v ) {
-				if ( 'alphaEnabled' === k || 'isDeprecated' === k ) {
-					return true;
-				}
-
-				var value = ( k in self.options ? self.options[k] : undef );
-				switch( k ) {
-					case 'alphaCustomWidth':
-						value = ( value === undef ? v : value );
-						value = ( value ? parseInt( value, 10 ) : 0 );
-						value = ( isNaN( value ) ? v : value );
-						break;
-					case 'alphaColorType':
-						if ( value === undef || ! value.match( /^(hex|rgb|hsl)$/ ) ) {
-							var color = self.initialValue;
-							if ( !!color && self.options.defaultColor ) {
-								color = self.options.defaultColor;
-							}
-
-							if ( color && color.match( /^(rgb|hsl)/ ) ) {
-								value = color.substring( 0, 3 );
-							}
-						} else {
-							value = v;
-						}
-						break;
-					default:
-						value = ( value === undef ? v : !!value );
-						break;
-				}
-				options[k] = value;
-
+			self.toggler.css( {
+				'position': 'relative',
+				'background-image' : 'url(' + backgroundImage + ')'
 			} );
 
-			self._alphaOptions = $.extend( self._alphaOptions, options );
-
-			self.toggler.css( { 'background-image' : 'url(' + backgroundImage + ')' } );
-			if ( self._alphaOptions.isDeprecated ) {
+			if ( isDeprecated ) {
 				self.toggler.html( '<span class="color-alpha" />' );
 			} else {
-				self.toggler.css( { 'position' : 'relative' } ).append('<span class="color-alpha" />');
+				self.toggler.append( '<span class="color-alpha" />' );
 			}
 
-			self.colorAlpha = self.toggler.find( 'span.color-alpha' );
-
-			self.colorAlpha.css( {
-				'width'                     : '30px',
-				'height'                    : '100%',
-				'position'                  : 'absolute',
-				'top'                       : 0,
-				'left'                      : 0,
-				'border-top-left-radius'    : '2px',
-				'border-bottom-left-radius' : '2px',
-				'background-color'          : el.val()
+			self.colorAlpha = self.toggler.find( 'span.color-alpha' ).css( {
+				'width'            : '30px',
+				'height'           : '100%',
+				'position'         : 'absolute',
+				'top'              : 0,
+				'background-color' : el.val(),
 			} );
 
+			// Define the correct position for ltr or rtl direction.
+			if ( 'ltr' === self.colorAlpha.css( 'direction' ) ) {
+				self.colorAlpha.css( {
+					'border-bottom-left-radius' : '2px',
+					'border-top-left-radius'    : '2px',
+					'left'                      : 0
+				} );
+			} else {
+				self.colorAlpha.css( {
+					'border-bottom-right-radius' : '2px',
+					'border-top-right-radius'    : '2px',
+					'right'                      : 0
+				} );
+			}
+
+
 			el.iris( {
-				alphaOptions: self._alphaOptions,
 				/**
 				 * @summary Handles the onChange event if one has been defined in the options.
 				 *
@@ -487,17 +539,9 @@
 				 * @returns {void}
 				 */
 				change: function( event, ui ) {
-					var instance = el.iris('instance');
+					self.colorAlpha.css( { 'background-color': ui.color.to_s( self.alphaOptions.alphaColorType ) } );
 
-					if ( self._alphaOptions.isDeprecated ) {
-						self.toggler.css( { 'background-image' : 'url(' + backgroundImage + ')' } );
-					}
-					/**
-					 * Call the Iris instance to get the CSS color.
-					 * Not use the ui.color because no if defined the type
-					 */
-					self.colorAlpha.css( { 'background-color': instance.color() } );
-
+					// fire change callback if we have one
 					if ( $.isFunction( self.options.change ) ) {
 						self.options.change.call( this, event, ui );
 					}
@@ -541,11 +585,11 @@
 			 *
 			 * @return {void}
 			 */
-			el.on( 'change', function( event ) {
+			el.change( function( event ) {
 				var val = $( this ).val();
 
 				if ( el.hasClass( 'iris-error' ) || val === '' || val.match( /^(#|(rgb|hsl)a?)$/ ) ) {
-					if ( self._alphaOptions.isDeprecated ) {
+					if ( isDeprecated ) {
 						self.toggler.removeAttr( 'style' );
 					}
 
@@ -567,53 +611,25 @@
 			 *
 			 * @return {void}
 			 */
-			self.button.on( 'click', function( event ) {
-				if ( $( this ).hasClass( 'wp-picker-clear' ) ) {
-					if ( self._alphaOptions.isDeprecated ) {
+			self.button.click( function( event ) {
+				if ( $( this ).hasClass( 'wp-picker-default' ) ) {
+					el.val( self.options.defaultColor ).change();
+				} else if ( $( this ).hasClass( 'wp-picker-clear' ) ) {
+					el.val( '' );
+					if ( isDeprecated ) {
 						self.toggler.removeAttr( 'style' );
 					}
+
 					self.colorAlpha.css( 'background-color', '' );
 
-					el.val( '' );
-
+					// fire clear callback if we have one
 					if ( $.isFunction( self.options.clear ) ) {
 						self.options.clear.call( this, event );
 					}
 
 					el.trigger( 'change' );
-				} else if ( $( this ).hasClass( 'wp-picker-default' ) ) {
-					el.val( self.options.defaultColor ).change();
 				}
-			});
-		},
-		/**
-		 * Returns the iris object if no new color is provided. If a new color is provided, it sets the new color.
-		 *
-		 * @param newColor {string|*} The new color to use. Can be undefined.
-		 *
-		 * @since 3.0.0
-		 *
-		 * @return {string} The element's color.
-		 */
-		color: function( newColor ) {
-			if ( newColor === undef ) {
-				if ( this._alphaOptions.alphaEnabled ) {
-					return this.element.iris('instance').color();
-				}
-				return this.element.iris( 'option', 'color' );
-			}
-			this.element.iris( 'option', 'color', newColor );
+			} );
 		},
 	} );
-
-	/**
-	 * Auto call this Color Picker version.
-	 *
-	 * @since 1.0.0
-	 */
-	$( document ).ready( function() {
-		$( '.color-picker' ).wpColorPicker();
-
-	} );
-
 } ( jQuery ) );
