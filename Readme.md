@@ -68,6 +68,7 @@ For testing download or clone [wp-color-picker-alpha-plugin](https://github.com/
  * Rewrite the code, now only the necessary methods are overwritten to try to give better compatibility.
  * Issue [#4](../../issues/4)
  * Issue [#19](../../issues/19)
+ * Issue [#23](../../issues/23)
  * Issue [#26](../../issues/26)
  * Issue [#30](../../issues/30)
  * Issue [#35](../../issues/35)
