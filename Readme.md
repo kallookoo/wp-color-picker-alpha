@@ -4,8 +4,6 @@
 
 > Only run in input and is defined data alpha in true
 
-# IMPORTANT: This version change the data's and is one RC.
-
 ## Screenshots
 ###### wpColorPicker
 
@@ -16,31 +14,34 @@
 ![wpcolorpicker-02](https://cloud.githubusercontent.com/assets/747817/5768335/17eae354-9d10-11e4-95cf-14868124309c.png)
 ![wpcolorpicker-03](https://cloud.githubusercontent.com/assets/747817/5768336/1b6ff956-9d10-11e4-80e1-7bcf3fde8ea8.png)
 
-## Installation
+## Usage
 Download and copy script inside folder dist in you theme options or plugin.
-For call this script use this code:
+This would be an example to use it:
 ```
 wp_enqueue_style( 'wp-color-picker' );
-wp_enqueue_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), $current_version, $in_footer );
+wp_register_script( 'wp-color-picker-alpha', $url_to_script, array( 'wp-color-picker' ), $current_version, $in_footer );
+wp_add_inline_script(
+	'wp-color-picker-alpha',
+	'jQuery( function() { jQuery( ".color-picker" ).wpColorPicker(); } );'
+);
+wp_enqueue_script( 'wp-color-picker-alpha' );
 ```
-
-## Usage
 Add class `.color-picker` and `data-alpha-enabled="true"` in input.
 
-> This class is optional but then need to call wpColorPicker yourself to the class you want.
+> On previous versions of the 3.0.0 this script it starts automatically, but I have decided not to do it anymore.
 
 ###### Optional
  * data-alpha-reset:
   * For set Alpha Channel for disabled transparency after press color palette.
 
  * data-alpha-custom-width:
-  * By default the input width is 100 on rgba mode
-  * For disabled default input witdh in mode rgba ( Possible values: "false", "0" )
-  * For change default input width in mode rgba ( change the number you want, "in pixels" )
+  * By default the input width is increased so that everything can be seen, with a value of 130 plus the original size.
+  * For change default input width ( change the number you want, "in pixels" )
+  * To disable this feature can also specify the value like "false" or "0".
 
 * data-alpha-color-type:
- * To set the type of format; hex, rgb, hsl. Use the current or default color.
-   By default is rgb and if is hex change to rgba when the alpha channel is set.
+ * To set the type of color format; hex, rgb, hsl. Use the current or default color.
+   By default is rgb and if is hex change to rgba when the alpha channel is set. It also supports rgba and hsla.
 
 
 ## License
@@ -50,15 +51,18 @@ Licensed under the GPLv2 license or later.
 If you would like to contribute please fork the project and [report bugs][2] or submit [pull requests][3].
 
 ## Tested
-If only tested in Firefox (Linux) and WordPress last versions
+It was tested with Firefox 82.0 (Ubuntu) and the WordPress 5.5.2 version.
 
 ## Testing
-For only testing download or clone [wp-color-picker-alpha-plugin](https://github.com/kallookoo/wp-color-picker-alpha-plugin) inside WordPress plugins folder and activate.
+For testing download or clone [wp-color-picker-alpha-plugin](https://github.com/kallookoo/wp-color-picker-alpha-plugin) inside WordPress plugins folder and activate.
 
 
 ## Changelog
 ###### v3.0.0
- * The RC for the new version, resolve various issues. 
+ * Rewrite the code, now only the necessary methods are overwritten to try to give better compatibility.
+ * Fix issue [#30](../../issues/30)
+ * Fix issue [#35](../../issues/35)
+ * Fix issue [#36](../../issues/36)
 
 ###### v2.1.4
  * Fix issue [#31](../../issues/31), Thanks for @webaware
