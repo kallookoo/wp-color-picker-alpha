@@ -4,7 +4,7 @@
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 3.0.0
+ * Version: 3.0.1
  * https://github.com/kallookoo/wp-color-picker-alpha
  * Licensed under the GPLv2 license or later.
  */
@@ -567,7 +567,7 @@
 			 *
 			 * @since 3.0.0
 			 */
-			self.toggler.click( function() {
+			self.toggler.on( 'click', function() {
 				if ( self.toggler.hasClass( 'wp-picker-open' ) ) {
 					self.close();
 				} else {
@@ -611,7 +611,7 @@
 			 *
 			 * @return {void}
 			 */
-			self.button.click( function( event ) {
+			self.button.on( 'click', function( event ) {
 				if ( $( this ).hasClass( 'wp-picker-default' ) ) {
 					el.val( self.options.defaultColor ).change();
 				} else if ( $( this ).hasClass( 'wp-picker-clear' ) ) {

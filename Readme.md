@@ -32,21 +32,21 @@ Add class `.color-picker` and `data-alpha-enabled="true"` in input.
 
 ### Optional
  * data-alpha-reset:
- 
+
    For set Alpha Channel for disabled transparency after press color palette.
 
  * data-alpha-custom-width:
- 
+
    By default the input width is increased so that everything can be seen, with a value of 130 plus the original size.
-   
+
    For change default input width ( change the number you want, "in pixels" )
-   
+
    To disable this feature can also specify the value like "false" or "0".
 
 * data-alpha-color-type:
-  
+
   To set the type of color format; hex, rgb, hsl. Use the current or default color.
-  
+
   By default is rgb and if is hex change to rgba when the alpha channel is set. It also supports rgba and hsla.
 
 
@@ -64,6 +64,9 @@ For testing download or clone [wp-color-picker-alpha-plugin](https://github.com/
 
 
 ## Changelog
+###### v3.0.1
+* Issue [#46](../../issues/46)
+
 ###### v3.0.0
  * Rewrite the code, now only the necessary methods are overwritten to try to give better compatibility.
  * Issue [#4](../../issues/4)
@@ -79,7 +82,7 @@ For testing download or clone [wp-color-picker-alpha-plugin](https://github.com/
 
 ###### v2.1.3
  * Fix issue [#13](../../pull/13), Thanks for @jtsternberg, see [#15](../../pull/15)
- 
+
 ###### v2.1.2
  * Declare some global variables when is deprecated or not
  * Change method to check WordPress version, recommended by @webaware, see [comments][5]
