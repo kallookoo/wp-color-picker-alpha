@@ -4,7 +4,7 @@
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 3.0.1
+ * Version: 3.0.2
  * https://github.com/kallookoo/wp-color-picker-alpha
  * Licensed under the GPLv2 license or later.
  */
@@ -12,7 +12,7 @@
 ( function( $, undef ) {
 
 	var wpColorPickerAlpha = {
-		'version' : 300
+		'version' : 302
 	};
 
 	// Always try to use the last version of this script.
@@ -542,7 +542,7 @@
 					self.colorAlpha.css( { 'background-color': ui.color.to_s( self.alphaOptions.alphaColorType ) } );
 
 					// fire change callback if we have one
-					if ( $.isFunction( self.options.change ) ) {
+					if ( typeof self.options.change === 'function' ) {
 						self.options.change.call( this, event, ui );
 					}
 				}
@@ -585,7 +585,7 @@
 			 *
 			 * @return {void}
 			 */
-			el.change( function( event ) {
+			el.on( 'change', function( event ) {
 				var val = $( this ).val();
 
 				if ( el.hasClass( 'iris-error' ) || val === '' || val.match( /^(#|(rgb|hsl)a?)$/ ) ) {
@@ -596,7 +596,7 @@
 					self.colorAlpha.css( 'background-color', '' );
 
 					// fire clear callback if we have one
-					if ( $.isFunction( self.options.clear ) ) {
+					if ( typeof self.options.clear === 'function' ) {
 						self.options.clear.call( this, event );
 					}
 				}
@@ -623,7 +623,7 @@
 					self.colorAlpha.css( 'background-color', '' );
 
 					// fire clear callback if we have one
-					if ( $.isFunction( self.options.clear ) ) {
+					if ( typeof self.options.clear === 'function' ) {
 						self.options.clear.call( this, event );
 					}
 
@@ -632,4 +632,4 @@
 			} );
 		},
 	} );
-} ( jQuery ) );
+} )( jQuery );

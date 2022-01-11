@@ -64,6 +64,9 @@ For testing download or clone [wp-color-picker-alpha-plugin](https://github.com/
 
 
 ## Changelog
+###### v3.0.2
+* Issue [#47](../../issues/47)
+
 ###### v3.0.1
 * Issue [#46](../../issues/46)
 
