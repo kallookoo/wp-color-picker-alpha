@@ -110,6 +110,7 @@
 				alphaReset: false,
 				alphaColorType: 'hex',
 				alphaColorWithSpace: false,
+				alphaSkipDebounce: false,
 			} );
 
 			this._super();
@@ -146,7 +147,11 @@
 					}
 				};
 
-			input.on( 'change', callback ).on( 'keyup', self._debounce( callback, debounceTimeout ) );
+			input.on( 'change', callback );
+
+			if( ! self.alphaOptions.alphaSkipDebounce ) {
+				input.on( 'keyup', self._debounce( callback, debounceTimeout ) );
+			}
 
 			// If we initialized hidden, show on first focus. The rest is up to you.
 			if ( self.options.hide ) {
@@ -408,6 +413,7 @@
 					alphaReset: false,
 					alphaColorType: 'rgb',
 					alphaColorWithSpace: false,
+					alphaSkipDebounce: ( !!el.data( 'alphaSkipDebounce' ) || false ),
 				};
 
 			if ( options.alphaEnabled ) {
