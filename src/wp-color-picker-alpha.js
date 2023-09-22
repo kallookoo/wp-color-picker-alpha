@@ -4,7 +4,7 @@
  * Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker
  * Only run in input and is defined data alpha in true
  *
- * Version: 3.0.2
+ * Version: 3.0.3
  * https://github.com/kallookoo/wp-color-picker-alpha
  * Licensed under the GPLv2 license or later.
  */
@@ -111,6 +111,7 @@
 				alphaColorType: 'hex',
 				alphaColorWithSpace: false,
 				alphaSkipDebounce: false,
+				alphaDebounceTimeout: 100,
 			} );
 
 			this._super();
@@ -125,7 +126,6 @@
 		 */
 		_addInputListeners: function( input ) {
 			var self = this,
-				debounceTimeout = 100,
 				callback = function( event ){
 					var val = input.val(),
 						color = new Color( val ),
@@ -150,7 +150,7 @@
 			input.on( 'change', callback );
 
 			if( ! self.alphaOptions.alphaSkipDebounce ) {
-				input.on( 'keyup', self._debounce( callback, debounceTimeout ) );
+				input.on( 'keyup', self._debounce( callback, self.alphaOptions.alphaDebounceTimeout ) );
 			}
 
 			// If we initialized hidden, show on first focus. The rest is up to you.

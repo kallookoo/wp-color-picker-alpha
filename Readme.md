@@ -64,6 +64,10 @@ For testing download or clone [wp-color-picker-alpha-plugin](https://github.com/
 
 
 ## Changelog
+###### v3.0.3
+* Add option to change the debounce timeout
+* Merge the [#49](../../pull/49) to add the skip debounce timeout.
+
 ###### v3.0.2
 * Issue [#47](../../issues/47)
 
