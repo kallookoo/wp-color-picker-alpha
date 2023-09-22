@@ -57,7 +57,7 @@ Add class `.color-picker` and `data-alpha-enabled="true"` in input.
 
 * data-alpha-debounce-timeout:
 
-  Change the default timeout on debounce callback, by de default is 100.
+  Change the default timeout on debounce callback, by default is 100.
 
 ## License
 Licensed under the GPLv2 license or later.
