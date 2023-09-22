@@ -49,6 +49,15 @@ Add class `.color-picker` and `data-alpha-enabled="true"` in input.
 
   By default is rgb and if is hex change to rgba when the alpha channel is set. It also supports rgba and hsla.
 
+* data-alpha-skip-debounce:
+
+  Skip the debounce, when set the color inside of the input.
+
+  Set to true, to skip the debounce.
+
+* data-alpha-debounce-timeout:
+
+  Change the default timeout on debounce callback, by de default is 100.
 
 ## License
 Licensed under the GPLv2 license or later.
