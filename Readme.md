@@ -66,7 +66,7 @@ Licensed under the GPLv2 license or later.
 If you would like to contribute please fork the project and [report bugs][2] or submit [pull requests][3].
 
 ## Tested
-It was tested with Firefox 82.0 (Ubuntu) and the WordPress 5.5.2 version.
+It was tested with Firefox and the WordPress 6.5.3 version.
 
 ## Testing
 For testing download or clone [wp-color-picker-alpha-plugin](https://github.com/kallookoo/wp-color-picker-alpha-plugin) inside WordPress plugins folder and activate.
