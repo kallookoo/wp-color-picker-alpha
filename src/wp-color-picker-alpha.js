@@ -12,7 +12,7 @@
 ( function( $, undef ) {
 
 	var wpColorPickerAlpha = {
-		'version' : 302
+		'version' : 303
 	};
 
 	// Always try to use the last version of this script.
