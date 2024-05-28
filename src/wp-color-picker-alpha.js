@@ -71,7 +71,7 @@
 		 * @since 3.0.0
 		 * @access private
 		 *
-		 * @param {Object|*} The color instance if not defined return the cuurent color.
+		 * @param {Object|*} The color instance if not defined return the current color.
 		 *
 		 * @return {string} The element's color.
 		 */
@@ -268,20 +268,18 @@
 		 * @return {void}
 		 */
 		_change: function() {
-			var self   = this,
-				active = self.active;
-
 			self._super();
 
-			if ( self.alphaOptions.alphaEnabled ) {
-				var	controls     = self.controls,
+			if ( this.alphaOptions.alphaEnabled ) {
+				var self         = this,
+					active       = self.active
+					controls     = self.controls,
 					alpha        = parseInt( self._color._alpha * 100 ),
 					color        = self._color.toRgb(),
 					gradient     = [
 						'rgb(' + color.r + ',' + color.g + ',' + color.b + ') 0%',
 						'rgba(' + color.r + ',' + color.g + ',' + color.b + ', 0) 100%'
-					],
-					target       = self.picker.closest( '.wp-picker-container' ).find( '.wp-color-result' );
+					];
 
 				self.options.color = self._getColor();
 				// Generate background slider alpha, only for CSS3.
@@ -618,9 +616,10 @@
 			 * @return {void}
 			 */
 			self.button.on( 'click', function( event ) {
-				if ( $( this ).hasClass( 'wp-picker-default' ) ) {
+				var $this = $( this );
+				if ( $this.hasClass( 'wp-picker-default' ) ) {
 					el.val( self.options.defaultColor ).change();
-				} else if ( $( this ).hasClass( 'wp-picker-clear' ) ) {
+				} else if ( $this.hasClass( 'wp-picker-clear' ) ) {
 					el.val( '' );
 					if ( isDeprecated ) {
 						self.toggler.removeAttr( 'style' );
