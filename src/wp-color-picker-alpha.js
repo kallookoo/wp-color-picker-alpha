@@ -40,9 +40,50 @@
 		if ( 'hex' === type ) {
 			color = this.toString();
 		} else if ( ! this.error ) {
-			color = this.toCSS( type ).replace( /\(\s+/, '(' ).replace( /\s+\)/, ')' );
+			if ( 'octohex' == type ) {
+				var alpha = parseInt( 255 * this._alpha, 10 ).toString(16);
+				if ( alpha.length === 1 ) {
+					alpha = '0' + alpha;
+				}
+				color = this.toString() + alpha;
+			} else {
+				color = this.toCSS( type ).replace( /\(\s+/, '(' ).replace( /\s+\)/, ')' );
+			}
 		}
 		return color;
+	}
+
+	Color.fn.fromHex = function( color ) {
+		color = color.replace(/^#/, '').replace(/^0x/, '');
+		if ( 3 === color.length || 4 === color.length ) {
+			var extendedColor = '';
+			for (var index = 0; index < color.length; index++) {
+				extendedColor += '' + color[index];
+				extendedColor += '' + color[index];
+			}
+			color = extendedColor;
+		}
+
+		if ( color.length === 8 ) {
+			if ( /^[0-9A-F]{8}$/i.test( color ) ) {
+				var alpha = parseInt(color.substring(6), 16);
+				if ( ! isNaN(alpha) ) {
+					this.a( alpha / 255 );
+				} else {
+					this._error();
+				}
+			} else {
+				this._error();
+			}
+			color = color.substring(0, 6);
+		}
+
+		if ( ! this.error ) {
+			this.error = ! /^[0-9A-F]{6}$/i.test( color );
+		}
+
+		// console.log(color + ': ' + this.a())
+		return this.fromInt( parseInt( color, 16 ) );
 	}
 
 	// Register the global variable.
@@ -268,18 +309,20 @@
 		 * @return {void}
 		 */
 		_change: function() {
+			var self   = this,
+				active = self.active;
+
 			self._super();
 
-			if ( this.alphaOptions.alphaEnabled ) {
-				var self         = this,
-					active       = self.active
-					controls     = self.controls,
+			if ( self.alphaOptions.alphaEnabled ) {
+				var	controls     = self.controls,
 					alpha        = parseInt( self._color._alpha * 100 ),
 					color        = self._color.toRgb(),
 					gradient     = [
 						'rgb(' + color.r + ',' + color.g + ',' + color.b + ') 0%',
 						'rgba(' + color.r + ',' + color.g + ',' + color.b + ', 0) 100%'
-					];
+					],
+					target       = self.picker.closest( '.wp-picker-container' ).find( '.wp-color-result' );
 
 				self.options.color = self._getColor();
 				// Generate background slider alpha, only for CSS3.
@@ -432,7 +475,7 @@
 						value = ( isNaN( value ) ? defaultValue : value );
 						break;
 					case 'alphaColorType':
-						if ( ! value.match( /^(hex|(rgb|hsl)a?)$/ ) ) {
+						if ( ! value.match( /^((octo)?hex|(rgb|hsl)a?)$/ ) ) {
 							if ( color && color.match( /^#/ ) ) {
 								value = 'hex';
 							} else if ( color && color.match( /^hsla?/ ) ) {
@@ -616,10 +659,9 @@
 			 * @return {void}
 			 */
 			self.button.on( 'click', function( event ) {
-				var $this = $( this );
-				if ( $this.hasClass( 'wp-picker-default' ) ) {
+				if ( $( this ).hasClass( 'wp-picker-default' ) ) {
 					el.val( self.options.defaultColor ).change();
-				} else if ( $this.hasClass( 'wp-picker-clear' ) ) {
+				} else if ( $( this ).hasClass( 'wp-picker-clear' ) ) {
 					el.val( '' );
 					if ( isDeprecated ) {
 						self.toggler.removeAttr( 'style' );

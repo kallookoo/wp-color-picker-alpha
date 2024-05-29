@@ -47,7 +47,9 @@ Add class `.color-picker` and `data-alpha-enabled="true"` in input.
 
   To set the type of color format; hex, rgb, hsl. Use the current or default color.
 
-  By default is rgb and if is hex change to rgba when the alpha channel is set. It also supports rgba and hsla.
+  By default is rgb and if is hex change to rgba when the alpha channel is set. It also supports rgba, hsla and octo hexadecimal.
+
+  For limitations you must specify octohex as type when you want to use the hexadecimal format and the alpha channel.
 
 * data-alpha-skip-debounce:
 
