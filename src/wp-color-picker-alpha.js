@@ -268,7 +268,7 @@
 		 * @return {void}
 		 */
 		_change: function() {
-			self._super();
+			this._super();
 
 			if ( this.alphaOptions.alphaEnabled ) {
 				var self         = this,
