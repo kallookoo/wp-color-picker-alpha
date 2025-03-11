@@ -1,0 +1,9 @@
+{
+	"markdownlint.run": "onType",
+	"markdownlint.config": {
+		"default": true,
+		"MD024": {
+			"siblings_only": true
+		}
+	}
+}
