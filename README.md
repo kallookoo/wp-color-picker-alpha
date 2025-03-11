@@ -24,11 +24,6 @@
 
 2. **Enqueue Styles and Scripts**: Add the following code to enqueue the necessary styles and scripts in your theme or plugin:
 
-    > [!TIP]
-    > Remove unnecessary comments once the functionality is understood.
-    > [!CAUTION]
-    > Esta es una muestra de como se deberia incluir y deberia ajustarse segun necesidades.
-
     ```php
     // Enqueue the default WordPress color picker style
     wp_enqueue_style( 'wp-color-picker' );
@@ -81,9 +76,14 @@
     ```html
     <input type="text" class="color-picker" data-alpha-enabled="true" />
     ```
+> [!TIP]
+> Remove unnecessary comments once the functionality is understood.
 
 > [!IMPORTANT]
 > In versions prior to 3.0.0, this script started automatically. This behavior has been changed and it no longer starts automatically.
+ 
+> [!CAUTION]
+> This is a sample of how it should be included and should be adjusted as needed.
 
 ### Optional Attributes
 
