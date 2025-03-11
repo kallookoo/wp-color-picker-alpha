@@ -3,21 +3,6 @@
 * Overwrite [Automattic Iris][1] for enabled Alpha Channel in wpColorPicker
 * Overwrite [WordPress Color Picker][4] for better implementation of overwriting the Iris
 
-> [!IMPORTANT]
-> Only run in input and is defined data alpha in true
-
-## Screenshots
-
-### wpColorPicker
-
-![wpcolorpicker-01](./docs/screenshot-01.png)
-
-### wpColorPicker in mode Alpha Channel
-
-![wpcolorpicker-02](./docs/screenshot-02.png)
-
-![wpcolorpicker-03](./docs/screenshot-03.png)
-
 ## Usage
 
 1. **Download and Copy Script**: Download the script and copy it into the `js` folder of your theme options or plugin.
@@ -77,14 +62,16 @@
     <input type="text" class="color-picker" data-alpha-enabled="true" />
     ```
 
-> [!TIP]
-> Remove unnecessary comments once the functionality is understood.
-
-> [!IMPORTANT]
-> In versions prior to 3.0.0, this script started automatically. This behavior has been changed and it no longer starts automatically.
-
 > [!CAUTION]
 > This is a sample of how it should be included and should be adjusted as needed.
+
+> [!IMPORTANT]
+> Only run in input and is defined data alpha in true.
+> 
+> In versions prior to 3.0.0, this script started automatically. This behavior has been changed and it no longer starts automatically.
+
+> [!TIP]
+> Remove unnecessary comments once the functionality is understood.
 
 ### Optional Attributes
 
@@ -101,6 +88,18 @@ You can use the following optional attributes to customize the behavior of the c
 > [!TIP]
 > You can check or see an example of how to implement it in this repository [wp-color-picker-alpha-plugin](https://github.com/kallookoo/wp-color-picker-alpha-plugin).
 > If you want to try it install it like any other plugin that is not in the WordPress repository.
+
+## Screenshots
+
+### wpColorPicker
+
+![wpcolorpicker-01](./docs/screenshot-01.png)
+
+### wpColorPicker in mode Alpha Channel
+
+![wpcolorpicker-02](./docs/screenshot-02.png)
+
+![wpcolorpicker-03](./docs/screenshot-03.png)
 
 ## Support
 
