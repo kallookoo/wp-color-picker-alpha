@@ -10,13 +10,13 @@
 
 ### wpColorPicker
 
-![wpcolorpicker-01](/.github/assets/screenshots-01.png)
+![wpcolorpicker-01](./docs/screenshots-01.png)
 
 ### wpColorPicker in mode Alpha Channel
 
-![wpcolorpicker-02](/.github/assets/screenshots-02.png)
+![wpcolorpicker-02](./docs/screenshots-02.png)
 
-![wpcolorpicker-03](/.github/assets/screenshots-03.png)
+![wpcolorpicker-03](./docs/screenshots-03.png)
 
 ## Usage
 
@@ -76,12 +76,13 @@
     ```html
     <input type="text" class="color-picker" data-alpha-enabled="true" />
     ```
+
 > [!TIP]
 > Remove unnecessary comments once the functionality is understood.
 
 > [!IMPORTANT]
 > In versions prior to 3.0.0, this script started automatically. This behavior has been changed and it no longer starts automatically.
- 
+
 > [!CAUTION]
 > This is a sample of how it should be included and should be adjusted as needed.
 
