@@ -10,13 +10,13 @@
 
 ### wpColorPicker
 
-![wpcolorpicker-01](./docs/screenshots-01.png)
+![wpcolorpicker-01](./docs/screenshot-01.png)
 
 ### wpColorPicker in mode Alpha Channel
 
-![wpcolorpicker-02](./docs/screenshots-02.png)
+![wpcolorpicker-02](./docs/screenshot-02.png)
 
-![wpcolorpicker-03](./docs/screenshots-03.png)
+![wpcolorpicker-03](./docs/screenshot-03.png)
 
 ## Usage
 
