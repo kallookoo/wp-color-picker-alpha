@@ -91,6 +91,9 @@ You can use the following optional attributes to customize the behavior of the c
 
 ## Screenshots
 
+<details>
+<summary>Images</summary>
+
 ### wpColorPicker
 
 ![wpcolorpicker-01](./docs/screenshot-01.png)
@@ -101,7 +104,13 @@ You can use the following optional attributes to customize the behavior of the c
 
 ![wpcolorpicker-03](./docs/screenshot-03.png)
 
-## Support
+</details>
+
+## Changelog
+
+See [CHANGELOG](CHANGELOG.md) for more information.
+
+## Contributions and Support
 
 If you would like to contribute please fork the project and [report bugs][2] or submit [pull requests][3].
 
