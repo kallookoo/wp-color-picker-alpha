@@ -1,3 +1,5 @@
+[![Minify](https://github.com/kallookoo/wp-color-picker-alpha/actions/workflows/minify.yml/badge.svg?branch=main)](https://github.com/kallookoo/wp-color-picker-alpha/actions/workflows/minify.yml)
+
 # WordPress Color Picker Alpha
 
 * Overwrite [Automattic Iris][1] for enabled Alpha Channel in wpColorPicker
