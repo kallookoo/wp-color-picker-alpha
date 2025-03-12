@@ -18,10 +18,10 @@
   "license": "GPL-2.0-or-later",
   "author": "Sergio (kallookoo)",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "dist/wp-color-picker-alpha.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "minify": "terser src/wp-color-picker-alpha.js --config-file terser.config.json --output dist/wp-color-picker-alpha.terser.js"
+    "minify": "terser src/wp-color-picker-alpha.js --config-file terser.config.json --output dist/wp-color-picker-alpha.min.js"
   },
   "devDependencies": {
     "terser": "^5.39.0"

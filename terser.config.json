@@ -7,10 +7,5 @@
 		],
 		"drop_debugger": true
 	},
-	"mangle": {
-		"reserved": [
-			"jQuery",
-			"wp"
-		]
-	}
+	"mangle": false
 }

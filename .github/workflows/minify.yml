@@ -1,0 +1,30 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Minify
+
+on: push
+
+jobs:
+  minify:
+    env:
+      NODEJS_VERSION: "23"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ env.NODEJS_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODEJS_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'package-lock.json'
+      - run: |
+          npm ci
+          npm run minify --if-present
+      - name: Check for Changes
+        run: git status
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          file_pattern: 'dist/*.min.js'
