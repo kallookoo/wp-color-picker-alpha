@@ -1,0 +1,16 @@
+{
+	"compress": {
+		"drop_console": true,
+		"pure_funcs": [
+			"console.log",
+			"console.info"
+		],
+		"drop_debugger": true
+	},
+	"mangle": {
+		"reserved": [
+			"jQuery",
+			"wp"
+		]
+	}
+}

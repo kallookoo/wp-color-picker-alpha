@@ -1,0 +1,29 @@
+{
+  "name": "wp-color-picker-alpha",
+  "version": "3.0.4",
+  "description": "Overwrite Automattic Iris for enabled Alpha Channel in wpColorPicker",
+  "keywords": [
+    "wordpress",
+    "wp-color-picker",
+    "mode-rgba"
+  ],
+  "homepage": "https://github.com/kallookoo/wp-color-picker-alpha#readme",
+  "bugs": {
+    "url": "https://github.com/kallookoo/wp-color-picker-alpha/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kallookoo/wp-color-picker-alpha.git"
+  },
+  "license": "GPL-2.0-or-later",
+  "author": "Sergio (kallookoo)",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "minify": "terser src/wp-color-picker-alpha.js --config-file terser.config.json --output dist/wp-color-picker-alpha.terser.js"
+  },
+  "devDependencies": {
+    "terser": "^5.39.0"
+  }
+}
