@@ -117,7 +117,7 @@ If you would like to contribute please fork the project and [report bugs][2] or 
 > [!IMPORTANT]
 > Read the [CONTRIBUTING.md](/CONTRIBUTING.md) beforehand.
 
-[1]: https://automattic.github.io/Iris/
+[1]: https://github.com/Automattic/Iris
 [2]: https://github.com/kallookoo/wp-color-picker-alpha/issues
 [3]: https://github.com/kallookoo/wp-color-picker-alpha/pulls
 [4]: https://github.com/WordPress/WordPress/blob/master/wp-admin/js/color-picker.js
